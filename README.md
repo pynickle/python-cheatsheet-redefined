@@ -2,6 +2,8 @@
 
 Depend on Python v3.9.8
 
+All code snippets have been tested to ensure they work properly.
+
 Fork me on [GitHub](https://github.com/pynickle/python-cheatsheet).
 
 - [中文](README-zh-cn.md)

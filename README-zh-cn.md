@@ -2,6 +2,8 @@
 
 依赖Python v3.9.8
 
+所有代码片段都经过测试确保可以正常运行
+
 在[GitHub](https://github.com/pynickle/python-cheatsheet)上fork这个仓库吧
 
 - [中文](README-zh-cn.md)
