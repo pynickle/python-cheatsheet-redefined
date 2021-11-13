@@ -52,5 +52,5 @@ with open("README.md", "r", encoding="utf-8") as f:
     text = text.replace(readme_s, readme_zh_cn_s)
     for a in replace_contents:
         text = text.replace(a[0], a[1], 1)
-    with open("test.md", "w", encoding="utf-8") as f:
+    with open("README-zh-cn.md", "w", encoding="utf-8") as f:
         f.write(text)
