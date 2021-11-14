@@ -15,7 +15,7 @@ jobs:
 
       - uses: docker://pandoc/latex:2.9
         with:
-          args: --output=README.pdf ${{ steps.files_list.outputs.files }}
+          args: --output=README.pdf --pdf-engine=xelatex ${{ steps.files_list.outputs.files }}
           
       - uses: actions/upload-artifact@master
         with:
