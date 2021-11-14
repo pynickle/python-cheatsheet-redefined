@@ -6,12 +6,12 @@ jobs:
   convert_via_pandoc:
     runs-on: ubuntu-18.04
     steps:
-      - uses: docker://pandoc/core:2.16.1
+      - uses: docker://pandoc/latex:2.16.1
         with:
           args: >-
             --output README-zh-cn.pdf
             README-zh-cn.md
-      - uses: docker://pandoc/core:2.16.1
+      - uses: docker://pandoc/latex:2.16.1
         with:
           args: >-
             --output README.pdf
