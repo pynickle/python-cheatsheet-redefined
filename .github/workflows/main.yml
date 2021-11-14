@@ -11,3 +11,8 @@ jobs:
           args: >-
             --output README-zh-cn.pdf
             README-zh-cn.md
+      - uses: docker://pandoc/core:2.16.1
+        with:
+          args: >-
+            --output README.pdf
+            README.md
