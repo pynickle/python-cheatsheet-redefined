@@ -6,18 +6,15 @@ jobs:
   convert_via_pandoc:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
-
-      - name: create file list
-        id: files_list
-        run: |
-          echo "::set-output name=files::$(printf '"%s" ' *.md)"
+      - run:
+        mkdir output
 
       - uses: docker://pandoc/latex:2.9
         with:
-          args: --output=README.pdf --pdf-engine=xelatex ${{ steps.files_list.outputs.files }}
+          args: --output=output/README.pdf --pdf-engine=xelatex README.md
+          args: --output=output/README-zh-cn.pdf --pdf-engine=xelatex README-zh-cn.md
           
       - uses: actions/upload-artifact@master
         with:
-          name: output
+          name: ${{ github.run_number }}
           path: output
