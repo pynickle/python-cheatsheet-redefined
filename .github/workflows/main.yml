@@ -6,8 +6,9 @@ jobs:
   convert_via_pandoc:
     runs-on: ubuntu-18.04
     steps:
-      - run:
-        mkdir output
+      - name: mkdir
+        - run: |
+          mkdir output
 
       - uses: docker://pandoc/latex:2.9
         with:
