@@ -1,4 +1,4 @@
-name: Convert md to pdf
+name: Advanced Usage
 
 on: push
 
@@ -6,16 +6,22 @@ jobs:
   convert_via_pandoc:
     runs-on: ubuntu-18.04
     steps:
-      - name: mkdir
-        - run: |
-          mkdir output
+      - uses: actions/checkout@v2
+
+      - name: create file list
+        id: files_list
+        run: |
+          mkdir output  # create output dir
 
       - uses: docker://pandoc/latex:2.9
         with:
-          args: --output=output/README.pdf --pdf-engine=xelatex README.md
-          args: --output=output/README-zh-cn.pdf --pdf-engine=xelatex README-zh-cn.md
+          args: --output=output/README.pdf README.md --pdf-engine=xelatex
+      
+      - uses: docker://pandoc/latex:2.9
+        with:
+          args: --output=output/README-zh-cn.pdf README-zh-cn.md --pdf-engine=xelatex
           
       - uses: actions/upload-artifact@master
         with:
-          name: ${{ github.run_number }}
+          name: output
           path: output
