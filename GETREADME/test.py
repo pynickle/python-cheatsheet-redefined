@@ -81,7 +81,5 @@ ZeroDivisionError: division by zero"""
 
 
 if __name__ == "__main__":
-    code = main("README.md")
-    # print(code)
+    code = main("./README.md")
     doctest.run_docstring_examples(code, None)
-    # doctest.testfile("../README.md", optionflags=doctest.FAIL_FAST)

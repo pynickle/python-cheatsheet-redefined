@@ -12,7 +12,7 @@ Fork me on [GitHub](https://github.com/pynickle/python-cheatsheet).
 **Notes**:
 
 - **Every code snippet here can run independently (some need the files provided by this repo)**
-- **If you want to copy the code, use [command to code](https://pynickle.github.io/ctc.html)(Temporarily unavailable)**
+- **You can get a version of the page with switchable code themes and languages from the flask project in the web folder**
 - **You can use GETREADME.py to download README.md from the repository (Chinese or English, with or not with command line prefixes is up to you!)**
 
 ## Contents
@@ -760,8 +760,8 @@ False
 
 ```python
 >>> import glob
->>> glob.glob("*.md", recursive = True)
-['README-zh-cn.md', 'README.md', 'test.md']
+>>> glob.glob("*.pdf", recursive = True)
+['README-zh-cn.pdf', 'README.pdf']
 ```
 
 ## tempfile
@@ -921,8 +921,8 @@ b'Hello, python3!'
 >>> with zipfile.ZipFile("examples/g.zip") as f:   # extract zip file
 ...     f.extractall()
 ...
->>> with zipfile.ZipFile("LICENSE.zip", "a") as zip:   # create zip file
-...     zip.write("LICENSE")   # use write method to write files into zip file
+>>> with zipfile.ZipFile("a.zip", "a") as zip:   # create zip file
+...     zip.write("README.md")   # use write method to write files into zip file
 ...
 ```
 

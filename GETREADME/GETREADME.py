@@ -2,6 +2,7 @@ from sys import exit
 import time
 import re
 import codecs
+import base64
 
 import requests
 
@@ -54,21 +55,19 @@ def replace(all_data, all_code_without_prefix):
 def main(choice1, choice2):
     start = time.time()
     if choice1 == "1":
-        url = "https://raw.githubusercontent.com/pynickle/python-cheatsheet/master/README-zh-cn.md"
+        url = "https://raw.githubusercontent.com/pynickle/python-cheatsheet-redefined/master/README-zh-cn.md"
     else:
-        url = "https://raw.githubusercontent.com/pynickle/python-cheatsheet/master/README.md"
-    headers = {"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3858.0 Safari/537.36"}
+        url = "https://raw.githubusercontent.com/pynickle/python-cheatsheet-redefined/master/README.md"
 
     print("Requesting...")
-    r = requests.get(url, headers=headers)
-    f = open("python-cheatsheet.md", "w", encoding="utf-8")
+    r = requests.get(url)
+    with open("python-cheatsheet.md", "w", encoding="utf-8") as f:
+        f.write(r.text)
 
-    print("Processing...")
-    res = r.text.replace("\r\n", "\n")
-    print(res, file=f)
+    # res = r.text.replace("\r\n", "\n")
+    # print(res, file=f)
 
     print("Saving...")
-    f.close()
 
     if choice2 == "2":
         print("Removing...")

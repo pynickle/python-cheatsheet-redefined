@@ -1,20 +1,3 @@
-import re
-from rich import print
-
-"""
-with open("README.md", "r", encoding="utf-8") as f:
-    text = f.read()
-    name = re.findall("\*\*(.*?)\*\*: \[", text)
-    # print(name)
-with open("README-zh-cn.md", "r", encoding="utf-8") as f:
-    text_zh_cn = f.read()
-    name_zh_cn = re.findall("\*\*(.*?)\*\*: \[", text_zh_cn)
-replace_contents = []
-for a, b in zip(name, name_zh_cn):
-    replace_contents.append((a, b))
-print(replace_contents)
-"""
-
 replace_contents = [
     ('Text Processing', '文本处理'),
     ('Binary Data', '二进制数据'),
@@ -45,12 +28,15 @@ replace_contents = [
 
 with open("README.md", "r", encoding="utf-8") as f:
     text = f.read()
-    with open("GETREADME/README_S.md", "r", encoding="utf-8") as f:
-        readme_s = f.read()
-    with open("GETREADME/README_zh_cn_S.md", "r", encoding="utf-8") as f:
-        readme_zh_cn_s = f.read()
+
+    with open("GETREADME/README_S.md", "r", encoding="utf-8") as english_beginning:
+        readme_s = english_beginning.read()
+    with open("GETREADME/README_zh_cn_S.md", "r", encoding="utf-8") as chinese_beginning:
+        readme_zh_cn_s = chinese_beginning.read()
+
     text = text.replace(readme_s, readme_zh_cn_s)
-    for a in replace_contents:
-        text = text.replace(a[0], a[1], 1)
-    with open("README-zh-cn.md", "w", encoding="utf-8") as f:
-        f.write(text)
+    for replace_content in replace_contents:
+        text = text.replace(replace_content[0], replace_content[1], 1)
+
+    with open("README-zh-cn.md", "w", encoding="utf-8") as res:
+        res.write(text)

@@ -11,7 +11,7 @@
 
 **注意**:
 - **这里的每个代码片段都可以独立运行 （一些需要这个仓库提供的文件）**
-- **如果你希望复制代码，请使用[command to code](https://pynickle.github.io/ctc.html)(暂时不可用)**
+- **你可以通过web文件夹中的flask项目得到可以切换代码主题和语言的网页版本**
 - **你可以使用GETREADME.py来从仓库中下载README.md（中英文，命令行前缀的有无皆可选择）**
 
 ## 目录
@@ -759,8 +759,8 @@ False
 
 ```python
 >>> import glob
->>> glob.glob("*.md", recursive = True)
-['README-zh-cn.md', 'README.md', 'test.md']
+>>> glob.glob("*.pdf", recursive = True)
+['README-zh-cn.pdf', 'README.pdf']
 ```
 
 ## tempfile
@@ -920,8 +920,8 @@ b'Hello, python3!'
 >>> with zipfile.ZipFile("examples/g.zip") as f:   # extract zip file
 ...     f.extractall()
 ...
->>> with zipfile.ZipFile("LICENSE.zip", "a") as zip:   # create zip file
-...     zip.write("LICENSE")   # use write method to write files into zip file
+>>> with zipfile.ZipFile("a.zip", "a") as zip:   # create zip file
+...     zip.write("README.md")   # use write method to write files into zip file
 ...
 ```
 
