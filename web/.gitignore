@@ -1,0 +1,5 @@
+*.pyc
+
+Aptfile
+Procfile
+test.py
