@@ -256,32 +256,6 @@ function loadContent(language: LanguageType): void {
 
 // 等待DOM完全加载后执行代码
 document.addEventListener('DOMContentLoaded', function() {
-    // 创建全局前缀切换按钮
-    function createGlobalPrefixToggleButton() {
-        const buttonContainer = document.createElement('div');
-        buttonContainer.className = 'prefix-toggle-container';
-        buttonContainer.style.display = 'inline-block';
-        buttonContainer.style.marginRight = '1rem';
-        
-        const toggleButton = document.createElement('button');
-        toggleButton.id = 'prefix-toggle-button';
-        toggleButton.className = 'button';
-        toggleButton.textContent = 'Show without prefix';
-        toggleButton.addEventListener('click', function() {
-            // 切换全局前缀模式
-            const newMode = currentPrefixMode === 'with-prefix' ? 'without-prefix' : 'with-prefix';
-            applyPrefixMode(newMode);
-        });
-        
-        buttonContainer.appendChild(toggleButton);
-        
-        // 将按钮添加到下拉菜单旁边
-        const languageDropdown = document.getElementById('language');
-        if (languageDropdown && languageDropdown.parentNode) {
-            languageDropdown.parentNode.insertBefore(buttonContainer, languageDropdown);
-        }
-    }
-    
     // 初始化主题选择器
     const hlStyleParam: StyleType = (getURLParameter('hl_style') as StyleType) || 'atom-one-dark';
     const hlStyleNameMap: Record<StyleType, string> = {
@@ -405,8 +379,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // 创建全局前缀切换按钮
-    createGlobalPrefixToggleButton();
+
     
     // 初始加载内容
     loadContent(languageParam);
