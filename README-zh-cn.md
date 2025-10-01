@@ -1,20 +1,20 @@
-# Python标准库速查表
+# Python Standard Libraries Cheatsheet
 
-依赖Python v3.9.8
+Depend on Python v3.10.11
 
-所有代码片段都经过测试确保可以正常运行
+All code snippets have been tested to ensure they work properly.
 
-在[GitHub](https://github.com/pynickle/python-cheatsheet)上fork这个仓库吧
+Fork me on [GitHub](https://github.com/pynickle/python-cheatsheet-redefined).
 
 - [中文](README-zh-cn.md)
 - [English](README.md)
 
-**注意**:
-- **这里的每个代码片段都可以独立运行 （一些需要这个仓库提供的文件）**
-- **你可以通过web文件夹中的flask项目得到可以切换代码主题和语言的网页版本**
-- **你可以使用GETREADME.py来从仓库中下载README.md（中英文，命令行前缀的有无皆可选择）**
+**Notes**:
 
-## 目录
+- **Every code snippet here can run independently (some need the files provided by this repo)**
+- **You can use readme_snatcher.py to download README.md from the repository (Chinese or English, with or not with command line prefixes is up to you!)**
+
+## Contents
 
 **文本处理**: [``string``](#string), [``re``](#re), [``difflib``](#difflib),
 [``textwrap``](#textwrap), [``unicodedata``](#unicodedata), [``readline``](#readline)
@@ -126,6 +126,7 @@
 'Hello nick'
 >>> t.substitute(World = "nick")   # use args
 'Hello nick'
+>>> 
 >>> class MyTemplate(string.Template):
 ...     delimiter = "^"
 ...
@@ -144,11 +145,17 @@
 >>> strcmp = "www.baidu.com"
 >>> re.match("www", strcmp).span()   # span function to get index
 (0, 3)
->>> re.match("baidu", strcmp)   # re.match only match from the beginning of the string
->>> re.search("baidu", strcmp).span()   # re.search search from all string and return the first
+>>> 
+>>> # re.match only match from the beginning of the string
+>>> re.match("baidu", strcmp)
+>>> 
+>>> # re.search search from all string and return the first
+>>> re.search("baidu", strcmp).span()
 (4, 9)
 >>> strcmp = "baidu.com/runoob.com"
->>> re.findall("com", strcmp)   # re.findall find all results and return
+>>> 
+>>> # re.findall find all results and return
+>>> re.findall("com", strcmp)
 ['com', 'com']
 >>> re.findall("b(.*?).", strcmp)
 ['', '']
@@ -162,7 +169,9 @@
 >>> import re
 >>> re.split(r"\W", "hello,world")   # use regular expression
 ['hello', 'world']
->>> re.sub(r"Boy|Girl", "Human", "boy and girl", flags = re.I)   # re.I means ignoring apitalization
+>>> 
+>>> # re.I means ignoring capitalization
+>>> re.sub(r"Boy|Girl", "Human", "boy and girl", flags = re.I)
 'Human and Human'
 >>> re.escape(r"#$&*+-.^|~")
 '\\#\\$\\&\\*\\+\\-\\.\\^\\|\\~'
@@ -171,26 +180,6 @@
 ## difflib
 
 #### Differ
-
-```python
->>> import difflib
->>> d = difflib.Differ()
->>> text1 = """difflib
-... python version 3.7.4
-... difflib version 3.7.4
-... this is difflib document
-... """
->>> text2 = """difflib
-... python version 3.7.3
-... this is difflib document
-... feature: diff in linux
-... """
->>> text1_lines = text1.splitlines()
->>> text2_lines = text2.splitlines()
->>>
->>> list(d.compare(text1_lines, text2_lines))
-['  difflib', '- python version 3.7.4', '?                    ^\n', '+ python version 3.7.3', '?                    ^\n', '- difflib version 3.7.4', '  this is difflib document', '+ feature: diff in linux']
-```
 
 #### HtmlDiff
 
@@ -477,17 +466,18 @@ ValueError: duplicate values found in <enum 'Unique'>: Jack -> Nick
 0
 >>> bisect.bisect_right(a, 1)   # if it has the same, choose right
 1
->>> bisect.bisect(a, 1)
+>>> bisect.bisect(a, 1)   # same to bisect_right
 1
->>> bisect.insort(a, 1)   # bisect and insert
+>>> bisect.insort(a, 1)   # bisect and insert (same to insort_right)
 >>> a
 [1, 1, 2, 4, 5]
 >>> bisect.insort_left(a, 2)
 >>> a
 [1, 1, 2, 2, 4, 5]
->>> bisect.insort_right(a, 4)
->>> a
-[1, 1, 2, 2, 4, 4, 5]
+>>> 
+>>> data = [('red', 5), ('blue', 1), ('yellow', 8), ('black', 0)]
+>>> bisect.bisect_left(data, 3, key = lambda x: x[1])   # use key to choose the index
+2
 ```
 
 ## heapq
@@ -799,7 +789,7 @@ b'a'
 
 ```python
 >>> import filecmp
->>> filecmp.cmp("examples/cmp1.txt", "examples/cmp2.txt")
+>>> filecmp.cmp("test_env/cmp1.txt", "test_env/cmp2.txt")
 True
 ```
 
@@ -820,8 +810,6 @@ examples/cmp1.txt | Line Number: 3 |:  3
 examples/cmp1.txt | Line Number: 4 |:  4
 
 examples/cmp1.txt | Line Number: 5 |:  5
-
-
 ```
 
 ## shutil
@@ -830,10 +818,10 @@ examples/cmp1.txt | Line Number: 5 |:  5
 
 ```python
 >>> import shutil
->>> shutil.copyfile("examples/song.wav", "examples/copysong.wav")
+>>> shutil.copyfile("test_env/song.wav", "test_env/copysong.wav")
 'examples/copysong.wav'
 >>> shutil.rmtree("shutil_tree")   # can delete tree has contents, os.remove can't
->>> shutil.move("examples/copysong.wav", "myapp/copysong.wav")
+>>> shutil.move("test_env/copysong.wav", "myapp/copysong.wav")
 'myapp/copysong.wav'
 ```
 
@@ -843,7 +831,7 @@ examples/cmp1.txt | Line Number: 5 |:  5
 
 ```python
 >>> import linecache
->>> linecache.getline("examples/readme_snatcher.py", 1)   # start from one, not zero
+>>> linecache.getline("test_env/readme_snatcher.py", 1)   # start from one, not zero
 'from sys import exit\n'
 ```
 
@@ -917,7 +905,7 @@ b'Hello, python3!'
 
 ```python
 >>> import zipfile
->>> with zipfile.ZipFile("examples/g.zip") as f:   # extract zip file
+>>> with zipfile.ZipFile("test_env/g.zip") as f:   # extract zip file
 ...     f.extractall()
 ...
 >>> with zipfile.ZipFile("a.zip", "a") as zip:   # create zip file
@@ -1086,12 +1074,12 @@ Password:
 ...     res = os.popen(command)
 ...     print(res.read())
 ...
->>> cmd("python examples/argparse_example.py -a 1 -b 2 --sum 1 2 3 4 -r 10 -t")
+>>> cmd("python argparse_example.py -a 1 -b 2 --sum 1 2 3 4 -r 10 -t")
 Namespace(a=1, b=2, sum=[1, 2, 3, 4], required='10', true=True)
 3
 10
 
->>> cmd("python examples/argparse_example.py --help")
+>>> cmd("python argparse_example.py --help")
 usage: argparse_example.py [-h] [-a A] [-b B] [-s SUM [SUM ...]] -r REQUIRED
                            [-t]
 
@@ -1104,7 +1092,6 @@ optional arguments:
   -s SUM [SUM ...], --sum SUM [SUM ...]
   -r REQUIRED, --required REQUIRED
   -t, --true
-
 ```
 
 ## errno
@@ -1177,8 +1164,8 @@ Received b'Hello, world'
 ```python
 >>> import html
 >>> html.escape("As we all know, 2>1")
-'As we all know, 2&gt;1'
->>> html.unescape('As we all know, 2&gt;1')
+'As we all know, 2>1'
+>>> html.unescape('As we all know, 2>1')
 'As we all know, 2>1'
 ```
 
@@ -1202,7 +1189,7 @@ True
 
 ```python
 >>> import wave
->>> f = wave.open("examples/song.wav", "rb")
+>>> f = wave.open("test_env/song.wav", "rb")
 >>> f.getparams()
 _wave_params(nchannels=2, sampwidth=2, framerate=44100, nframes=442368, comptype='NONE', compname='not compressed')
 ```
@@ -1401,7 +1388,7 @@ python -m ensurepip --upgrade   # upgrade pip
 
 ```python
 >>> import zipapp
->>> zipapp.create_archive("myapp", "examples/myapp.pyz")
+>>> zipapp.create_archive("myapp", "test_env/myapp.pyz")
 >>> __import__("os").popen("python examples/myapp.pyz").read()   # pyz file can also be executed
 'Hello, everyone!\n'
 ```
@@ -1611,7 +1598,7 @@ True
 
 ```python
 >>> import zipimport
->>> zip = zipimport.zipimporter("examples/g.zip")
+>>> zip = zipimport.zipimporter("test_env/g.zip")
 >>> zip.archive
 'examples\\g.zip'
 >>>
@@ -1761,7 +1748,7 @@ Names:
 ```python
 >>> import tabnanny
 >>> tabnanny.verbose = True
->>> tabnanny.check("examples/tabnanny_example.py")
+>>> tabnanny.check("test_env/tabnanny_example.py")
 'examples/tabnanny_example.py': *** Line 3: trouble in tab city! ***
 offending line: '\tprint(i)'
 indent not greater e.g. at tab sizes 1, 2, 3, 4
