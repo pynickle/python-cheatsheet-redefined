@@ -42,7 +42,7 @@ jobs:
         run: npm run build
 
       - name: Install Pandoc
-        uses: pandoc/actions/setup@v1  # 安装最新 Pandoc；可以指定 version: 'latest' 或具体版本如 '3.1.1'
+        uses: pandoc/actions/setup@v1
 
       - name: Create assets directory if not exists
         run: mkdir -p web/assets
@@ -61,10 +61,10 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build  # 依赖 build 作业
+    needs: build
     environment:
-      name: github-pages  # Pages 环境
-      url: ${{ steps.deployment.outputs.page_url }}  # 可选：输出 URL
+      name: github-pages
+      url: https://enc.is-a.dev/python-cheatsheet
 
     steps:
       - name: Deploy to GitHub Pages
