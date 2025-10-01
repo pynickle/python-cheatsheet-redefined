@@ -12,6 +12,7 @@ Fork me on [GitHub](https://github.com/pynickle/python-cheatsheet-redefined).
 **Notes**:
 
 - **Every code snippet here can run independently (some need the files provided by this repo)**
+- **Get the best reading experience on my [website](https://enc.is-a.dev/python-cheatsheet-redefined)**
 - **You can use readme_snatcher.py to download README.md from the repository (Chinese or English, with or not with command line prefixes is up to you!)**
 
 ## Contents

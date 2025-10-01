@@ -1,20 +1,20 @@
-# Python Standard Libraries Cheatsheet
+# Python 标准库速查表
 
-Depend on Python v3.13.7
+依赖 Python v3.13.7
 
-All code snippets have been tested to ensure they work properly.
+所有代码片段都经过测试确保可以正常运行
 
-Fork me on [GitHub](https://github.com/pynickle/python-cheatsheet-redefined).
+在[GitHub](https://github.com/pynickle/python-cheatsheet-redefined)上fork这个仓库吧
 
 - [中文](README-zh-cn.md)
 - [English](README.md)
 
-**Notes**:
+**注意**:
+- **这里的每个代码片段都可以独立运行 （一些需要这个仓库提供的文件）**
+- **在我的 [网站](https://enc.is-a.dev/python-cheatsheet-redefined) 上享受最佳阅读体验**
+- **你可以使用 readme_snatcher.py 来从仓库中下载 README.md (中英文，命令行前缀的有无皆可选择)**
 
-- **Every code snippet here can run independently (some need the files provided by this repo)**
-- **You can use readme_snatcher.py to download README.md from the repository (Chinese or English, with or not with command line prefixes is up to you!)**
-
-## Contents
+## 目录
 
 **文本处理**: [``string``](#string), [``re``](#re), [``difflib``](#difflib),
 [``textwrap``](#textwrap), [``unicodedata``](#unicodedata), [``readline``](#readline)

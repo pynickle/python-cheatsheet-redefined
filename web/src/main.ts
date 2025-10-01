@@ -91,16 +91,16 @@ function setupCodeBlocks(): void {
                 // 设置pre元素的相对定位，以便按钮可以绝对定位
                 preElement.style.position = 'relative';
                 
-                // 创建复制按钮
+                // 创建复制代码按钮
                 const copyButton = document.createElement('button');
                 copyButton.className = 'button is-small mt-2 mr-2 is-white';
 
-                const buttonIcon = document.createElement('span');
-                copyButton.appendChild(buttonIcon)
-                buttonIcon.innerHTML = '<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="128" height="128"><path d="M256 938.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-128-128c-17.066667-17.066667-17.066667-42.666667 0-59.733334l640-640c17.066667-17.066667 42.666667-17.066667 59.733334 0l128 128c17.066667 17.066667 17.066667 42.666667 0 59.733334l-640 640c-8.533333 8.533333-17.066667 12.8-29.866667 12.8z m-68.266667-170.666667L256 836.266667 836.266667 256 768 187.733333 187.733333 768z" fill="#000000"></path><path d="M768 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-128-128c-17.066667-17.066667-17.066667-42.666667 0-59.733334s42.666667-17.066667 59.733334 0l128 128c17.066667 17.066667 17.066667 42.666667 0 59.733334-8.533333 8.533333-17.066667 12.8-29.866667 12.8zM384 341.333333c-25.6 0-42.666667-17.066667-42.666667-42.666666s-17.066667-42.666667-42.666666-42.666667-42.666667-17.066667-42.666667-42.666667 17.066667-42.666667 42.666667-42.666666 42.666667-17.066667 42.666666-42.666667 17.066667-42.666667 42.666667-42.666667 42.666667 17.066667 42.666667 42.666667 17.066667 42.666667 42.666666 42.666667 42.666667 17.066667 42.666667 42.666666-17.066667 42.666667-42.666667 42.666667-42.666667 17.066667-42.666666 42.666667-17.066667 42.666667-42.666667 42.666666zM810.666667 768c-25.6 0-42.666667-17.066667-42.666667-42.666667s-17.066667-42.666667-42.666667-42.666666-42.666667-17.066667-42.666666-42.666667 17.066667-42.666667 42.666666-42.666667 42.666667-17.066667 42.666667-42.666666 17.066667-42.666667 42.666667-42.666667 42.666667 17.066667 42.666666 42.666667 17.066667 42.666667 42.666667 42.666666 42.666667 17.066667 42.666667 42.666667-17.066667 42.666667-42.666667 42.666667-42.666667 17.066667-42.666667 42.666666-17.066667 42.666667-42.666666 42.666667z" fill="#000000"></path></svg>';
-                buttonIcon.className = 'icon is-small'
+                const copyIcon = document.createElement('span');
+                copyButton.appendChild(copyIcon);
+                copyIcon.innerHTML = '<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" p-id="2301" width="128" height="128"><path d="M672 832 224 832c-52.928 0-96-43.072-96-96L128 160c0-52.928 43.072-96 96-96l448 0c52.928 0 96 43.072 96 96l0 576C768 788.928 724.928 832 672 832zM224 128C206.368 128 192 142.368 192 160l0 576c0 17.664 14.368 32 32 32l448 0c17.664 0 32-14.336 32-32L704 160c0-17.632-14.336-32-32-32L224 128zM800 960 320 960c-17.664 0-32-14.304-32-32s14.336-32 32-32l480 0c17.664 0 32-14.336 32-32L832 256c0-17.664 14.304-32 32-32s32 14.336 32 32l0 608C896 916.928 852.928 960 800 960zM544 320 288 320c-17.664 0-32-14.336-32-32s14.336-32 32-32l256 0c17.696 0 32 14.336 32 32S561.696 320 544 320zM608 480 288.032 480c-17.664 0-32-14.336-32-32s14.336-32 32-32L608 416c17.696 0 32 14.336 32 32S625.696 480 608 480zM608 640 288 640c-17.664 0-32-14.304-32-32s14.336-32 32-32l320 0c17.696 0 32 14.304 32 32S625.696 640 608 640z" fill="#272636"></path></svg>';
+                copyIcon.className = 'icon is-small';
 
-                copyButton.title = 'Remove prefix';
+                copyButton.title = 'Copy code';
                 copyButton.style.position = 'absolute';
                 copyButton.style.top = '17px';
                 copyButton.style.right = '20px';
@@ -108,12 +108,74 @@ function setupCodeBlocks(): void {
                 
                 // 添加点击事件
                 copyButton.addEventListener('click', function() {
+                    // 获取当前代码块的内容并复制
+                    const codeToCopy = block.textContent || '';
+                    navigator.clipboard.writeText(codeToCopy).then(() => {
+                        // 创建浮动提示框
+                        const tooltip = document.createElement('div');
+                        tooltip.textContent = 'copied';
+                        tooltip.style.position = 'absolute';
+                        tooltip.style.top = '60px';
+                        tooltip.style.right = '30px'; // 复制按钮左侧
+                        tooltip.style.padding = '5px 10px';
+                        tooltip.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+                        tooltip.style.color = 'white';
+                        tooltip.style.borderRadius = '4px';
+                        tooltip.style.fontSize = '12px';
+                        tooltip.style.zIndex = '1000';
+                        tooltip.style.opacity = '0';
+                        tooltip.style.transition = 'opacity 0.3s ease';
+                        tooltip.style.pointerEvents = 'none';
+                        tooltip.style.minWidth = '60px';
+                        tooltip.style.textAlign = 'center';
+                        tooltip.style.fontWeight = 'bold';
+                        
+                        // 添加到pre元素
+                        preElement.appendChild(tooltip);
+                        
+                        // 触发重排后显示提示框
+                        setTimeout(() => {
+                            tooltip.style.opacity = '1';
+                        }, 10);
+                        
+                        // 2秒后移除提示框
+                        setTimeout(() => {
+                            tooltip.style.opacity = '0';
+                            setTimeout(() => {
+                                if (tooltip.parentNode) {
+                                    tooltip.parentNode.removeChild(tooltip);
+                                }
+                            }, 300);
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy text:', err);
+                    });
+                });
+
+                // 创建处理前缀按钮
+                const prefixButton = document.createElement('button');
+                prefixButton.className = 'button is-small mt-2 mr-2 is-white';
+
+                const prefixIcon = document.createElement('span');
+                prefixButton.appendChild(prefixIcon);
+                prefixIcon.innerHTML = '<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M256 938.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-128-128c-17.066667-17.066667-17.066667-42.666667 0-59.733334l640-640c17.066667-17.066667 42.666667-17.066667 59.733334 0l128 128c17.066667 17.066667 17.066667 42.666667 0 59.733334l-640 640c-8.533333 8.533333-17.066667 12.8-29.866667 12.8z m-68.266667-170.666667L256 836.266667 836.266667 256 768 187.733333 187.733333 768z" fill="#000000"></path><path d="M768 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-128-128c-17.066667-17.066667-17.066667-42.666667 0-59.733334s42.666667-17.066667 59.733334 0l128 128c17.066667 17.066667 17.066667 42.666667 0 59.733334-8.533333 8.533333-17.066667 12.8-29.866667 12.8zM384 341.333333c-25.6 0-42.666667-17.066667-42.666667-42.666666s-17.066667-42.666667-42.666666-42.666667-42.666667-17.066667-42.666667-42.666667 17.066667-42.666667 42.666667-42.666666 42.666667-17.066667 42.666666-42.666667 17.066667-42.666667 42.666667-42.666667 42.666667 17.066667 42.666667 42.666667 17.066667 42.666667 42.666666 42.666667 42.666667 17.066667 42.666667 42.666666-17.066667 42.666667-42.666667 42.666667-42.666667 17.066667-42.666666 42.666667-17.066667 42.666667-42.666667 42.666666zM810.666667 768c-25.6 0-42.666667-17.066667-42.666667-42.666667s-17.066667-42.666667-42.666667-42.666666-42.666667-17.066667-42.666666-42.666667 17.066667-42.666667 42.666666-42.666667 42.666667-17.066667 42.666667-42.666666 17.066667-42.666667 42.666667-42.666667 42.666667 17.066667 42.666666 42.666667 17.066667 42.666667 42.666667 42.666666 42.666667 17.066667 42.666667 42.666667-17.066667 42.666667-42.666667 42.666667-42.666667 17.066667-42.666667 42.666666-17.066667 42.666667-42.666666 42.666667z" fill="#000000"></path></svg>';
+                prefixIcon.className = 'icon is-small';
+
+                prefixButton.title = 'Remove prefix';
+                prefixButton.style.position = 'absolute';
+                prefixButton.style.top = '17px';
+                prefixButton.style.right = '60px'; // 移到复制按钮左侧
+                prefixButton.style.cursor = 'pointer';
+                
+                // 添加点击事件
+                prefixButton.addEventListener('click', function() {
                     // 切换当前代码块的前缀显示
                     toggleCodePrefix(blockId);
                 });
                 
                 // 添加按钮到pre元素
                 preElement.appendChild(copyButton);
+                preElement.appendChild(prefixButton);
             }
         }
     });
