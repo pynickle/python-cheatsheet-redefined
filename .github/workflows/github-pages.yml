@@ -22,7 +22,7 @@ jobs:
         run: npm install
 
       - name: Compile TypeScript
-        run: npm tsc  # 假设这是你的编译命令；如果不同，替换为 npm run build 或 tsc
+        run: npm tsc
 
       - name: Install Pandoc
         uses: pandoc/actions/setup@v1  # 安装最新 Pandoc；可以指定 version: 'latest' 或具体版本如 '3.1.1'
