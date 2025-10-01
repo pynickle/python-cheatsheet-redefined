@@ -26,12 +26,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: '22'  # 选择合适的 Node 版本
+          node-version: '22'
 
       - name: Install dependencies
         working-directory: web
@@ -56,7 +56,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
           path: ./web
 
   deploy:
@@ -64,9 +63,9 @@ jobs:
     needs: build
     environment:
       name: github-pages
-      url: https://enc.is-a.dev/python-cheatsheet
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4  # 使用 v4 部署
+        uses: actions/deploy-pages@v4
