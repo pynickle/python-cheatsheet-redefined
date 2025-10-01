@@ -19,10 +19,12 @@ jobs:
           node-version: '22'  # 选择合适的 Node 版本
 
       - name: Install dependencies
+        working-directory: web
         run: npm install
 
       - name: Compile TypeScript
-        run: npm tsc
+        working-directory: web
+        run: npm run build
 
       - name: Install Pandoc
         uses: pandoc/actions/setup@v1  # 安装最新 Pandoc；可以指定 version: 'latest' 或具体版本如 '3.1.1'
