@@ -726,11 +726,11 @@ True
 >>> import pathlib
 >>> p = pathlib.Path(".")
 >>> list(p.glob('**/*.py'))
-[WindowsPath('GETREADME.py'), WindowsPath('test.py')]
+[WindowsPath('readme_snatcher.py'), WindowsPath('test.py')]
 >>> p/"dir"   # use / to get further path
 WindowsPath('dir')
->>> (p/"GETREADME.py").name
-'GETREADME.py'
+>>> (p/"readme_snatcher.py").name
+'readme_snatcher.py'
 >>> p.is_absolute()
 False
 ```
@@ -843,7 +843,7 @@ examples/cmp1.txt | Line Number: 5 |:  5
 
 ```python
 >>> import linecache
->>> linecache.getline("examples/GETREADME.py", 1)   # start from one, not zero
+>>> linecache.getline("examples/readme_snatcher.py", 1)   # start from one, not zero
 'from sys import exit\n'
 ```
 

@@ -4,7 +4,7 @@ Depend on Python v3.9.8
 
 All code snippets have been tested to ensure they work properly.
 
-Fork me on [GitHub](https://github.com/pynickle/python-cheatsheet).
+Fork me on [GitHub](https://github.com/pynickle/python-cheatsheet-redefined).
 
 - [中文](README-zh-cn.md)
 - [English](README.md)
@@ -12,8 +12,7 @@ Fork me on [GitHub](https://github.com/pynickle/python-cheatsheet).
 **Notes**:
 
 - **Every code snippet here can run independently (some need the files provided by this repo)**
-- **You can get a version of the page with switchable code themes and languages from the flask project in the web folder**
-- **You can use GETREADME.py to download README.md from the repository (Chinese or English, with or not with command line prefixes is up to you!)**
+- **You can use readme_snatcher.py to download README.md from the repository (Chinese or English, with or not with command line prefixes is up to you!)**
 
 ## Contents
 
@@ -727,11 +726,11 @@ True
 >>> import pathlib
 >>> p = pathlib.Path(".")
 >>> list(p.glob('**/*.py'))
-[WindowsPath('GETREADME.py'), WindowsPath('test.py')]
+[WindowsPath('readme_snatcher.py'), WindowsPath('test.py')]
 >>> p/"dir"   # use / to get further path
 WindowsPath('dir')
->>> (p/"GETREADME.py").name
-'GETREADME.py'
+>>> (p/"readme_snatcher.py").name
+'readme_snatcher.py'
 >>> p.is_absolute()
 False
 ```
@@ -844,7 +843,7 @@ examples/cmp1.txt | Line Number: 5 |:  5
 
 ```python
 >>> import linecache
->>> linecache.getline("examples/GETREADME.py", 1)   # start from one, not zero
+>>> linecache.getline("examples/readme_snatcher.py", 1)   # start from one, not zero
 'from sys import exit\n'
 ```
 
