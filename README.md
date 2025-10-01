@@ -203,7 +203,7 @@ Fork me on [GitHub](https://github.com/pynickle/python-cheatsheet-redefined).
 ...     HtmlDiff = d.make_file(text1_lines, text2_lines)   # make it a html file
 ...     f.write(HtmlDiff)
 ...
-3331
+3391
 ```
 
 #### SequenceMatcher
@@ -260,7 +260,7 @@ Match(a=1, b=0, size=4)
 >>> unicodedata.name("(")   # reverse to lookup
 'LEFT PARENTHESIS'
 >>> unicodedata.unidata_version
-'13.0.0'
+'15.1.0'
 ```
 
 ## readline
@@ -380,7 +380,7 @@ deque(['a', 'b', 'c', 'd', 'e'])
 'None'
 >>> od = collections.OrderedDict([("a", 1), ("b", 2)])   # dict which always keeps the order
 >>> od
-OrderedDict([('a', 1), ('b', 2)])
+OrderedDict({'a': 1, 'b': 2})
 >>> c = collections.Counter()   # dict subclass for counting hashable objects
 >>> for i in "Hello, World":
 ...     c[i] = c[i] + 1
@@ -734,9 +734,9 @@ False
 >>> import os.path
 >>> os.path.exists(".")
 True
->>> os.path.getsize("./LICENSE")
-466
->>> os.path.isfile("./README.md")
+>>> os.path.getsize("cmp1.txt")
+15
+>>> os.path.isfile("cmp1.txt")
 True
 >>> os.path.isdir("./doc")
 False
@@ -750,8 +750,8 @@ False
 
 ```python
 >>> import glob
->>> glob.glob("*.pdf", recursive = True)
-['README-zh-cn.pdf', 'README.pdf']
+>>> glob.glob("*.txt", recursive = True)
+['cmp1.txt', 'cmp2.txt', 'doctest_example.txt']
 ```
 
 ## tempfile
@@ -790,7 +790,7 @@ b'a'
 
 ```python
 >>> import filecmp
->>> filecmp.cmp("test_env/cmp1.txt", "test_env/cmp2.txt")
+>>> filecmp.cmp("cmp1.txt", "cmp2.txt")
 True
 ```
 
@@ -800,17 +800,19 @@ True
 
 ```python
 >>> import os
->>> cmd = os.popen("python examples/fileinput_example.py examples/cmp1.txt")   # subprocess.Popen provides more features
+>>> cmd = os.popen("python fileinput_example.py cmp1.txt")   # subprocess.Popen provides more features
 >>> print(cmd.read())
-examples/cmp1.txt | Line Number: 1 |:  1
+cmp1.txt | Line Number: 1 |:  1
 
-examples/cmp1.txt | Line Number: 2 |:  2
+cmp1.txt | Line Number: 2 |:  2
 
-examples/cmp1.txt | Line Number: 3 |:  3
+cmp1.txt | Line Number: 3 |:  3
 
-examples/cmp1.txt | Line Number: 4 |:  4
+cmp1.txt | Line Number: 4 |:  4
 
-examples/cmp1.txt | Line Number: 5 |:  5
+cmp1.txt | Line Number: 5 |:  5
+
+
 ```
 
 ## shutil
@@ -819,11 +821,11 @@ examples/cmp1.txt | Line Number: 5 |:  5
 
 ```python
 >>> import shutil
->>> shutil.copyfile("test_env/song.wav", "test_env/copysong.wav")
-'examples/copysong.wav'
+>>> shutil.copyfile("song.wav", "copysong.wav")
+'copysong.wav'
 >>> shutil.rmtree("shutil_tree")   # can delete tree has contents, os.remove can't
->>> shutil.move("test_env/copysong.wav", "myapp/copysong.wav")
-'myapp/copysong.wav'
+>>> shutil.move("copysong.wav", "generated/copysong_move.wav")
+'generated/copysong_move.wav'
 ```
 
 ## linecache
@@ -832,7 +834,7 @@ examples/cmp1.txt | Line Number: 5 |:  5
 
 ```python
 >>> import linecache
->>> linecache.getline("test_env/readme_snatcher.py", 1)   # start from one, not zero
+>>> linecache.getline("readme_snatcher.py", 1)   # start from one, not zero
 'from sys import exit\n'
 ```
 
@@ -906,11 +908,11 @@ b'Hello, python3!'
 
 ```python
 >>> import zipfile
->>> with zipfile.ZipFile("test_env/g.zip") as f:   # extract zip file
-...     f.extractall()
+>>> with zipfile.ZipFile("g.zip") as f:   # extract zip file
+...     f.extractall("generated")
 ...
->>> with zipfile.ZipFile("a.zip", "a") as zip:   # create zip file
-...     zip.write("README.md")   # use write method to write files into zip file
+>>> with zipfile.ZipFile("generated/a.zip", "a") as zip:   # create zip file
+...     zip.write("cmp1.txt")   # use write method to write files into zip file
 ...
 ```
 
@@ -921,8 +923,8 @@ b'Hello, python3!'
 ```python
 >>> import configparser
 >>> config = configparser.ConfigParser()   # create an instance
->>> config.read("examples/config.ini")
-['examples/config.ini']
+>>> config.read("config.ini")
+['config.ini']
 >>> config.sections()
 ['python', 'java']
 >>> config["python"]["type"]   # all sections has values in DEFAULT
@@ -1093,6 +1095,7 @@ optional arguments:
   -s SUM [SUM ...], --sum SUM [SUM ...]
   -r REQUIRED, --required REQUIRED
   -t, --true
+
 ```
 
 ## errno
@@ -1165,7 +1168,7 @@ Received b'Hello, world'
 ```python
 >>> import html
 >>> html.escape("As we all know, 2>1")
-'As we all know, 2>1'
+'As we all know, 2&gt;1'
 >>> html.unescape('As we all know, 2>1')
 'As we all know, 2>1'
 ```
@@ -1190,29 +1193,9 @@ True
 
 ```python
 >>> import wave
->>> f = wave.open("test_env/song.wav", "rb")
+>>> f = wave.open("song.wav", "rb")
 >>> f.getparams()
 _wave_params(nchannels=2, sampwidth=2, framerate=44100, nframes=442368, comptype='NONE', compname='not compressed')
-```
-
-## sndhdr
-
-#### what
-
-```python
->>> import sndhdr
->>> sndhdr.what("examples/song.wav")
-SndHeaders(filetype='wav', framerate=44100, nchannels=2, nframes=442368, sampwidth=16)
-```
-
-## imghdr
-
-#### what
-
-```python
->>> import imghdr
->>> imghdr.what("examples/china.jpg")
-'jpeg'
 ```
 
 ## colorsys
@@ -1281,7 +1264,7 @@ python tkinter_example.py
 
 ```python
 >>> import doctest
->>> doctest.testfile("../examples/doctest_example.txt", verbose=True)
+>>> doctest.testfile("doctest_example.txt", verbose=True)
 Trying:
     from doctest_example import factorial
 Expecting nothing
@@ -1389,8 +1372,8 @@ python -m ensurepip --upgrade   # upgrade pip
 
 ```python
 >>> import zipapp
->>> zipapp.create_archive("myapp", "test_env/myapp.pyz")
->>> __import__("os").popen("python examples/myapp.pyz").read()   # pyz file can also be executed
+>>> zipapp.create_archive("myapp", "generated/myapp.pyz")
+>>> __import__("os").popen("python generated/myapp.pyz").read()   # pyz file can also be executed
 'Hello, everyone!\n'
 ```
 
@@ -1489,7 +1472,7 @@ __exit__ cm
 ...
 >>> user1 = UserOne()
 >>> dir(user1)
-['__abstractmethods__', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_abc_impl', 'age', 'hello', 'unique_hello']
+['__abstractmethods__', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__firstlineno__', '__format__', '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__static_attributes__', '__str__', '__subclasshook__', '__weakref__', '_abc_impl', 'age', 'hello', 'unique_hello']
 >>> isinstance(user1, User)
 True
 >>> class UserTwo():
@@ -1499,7 +1482,7 @@ True
 <class '__main__.UserTwo'>
 >>> user2 = UserTwo()
 >>> dir(user2)
-['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__']
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__firstlineno__', '__format__', '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__static_attributes__', '__str__', '__subclasshook__', '__weakref__']
 >>> issubclass(UserTwo, User)
 True
 ```
@@ -1599,13 +1582,13 @@ True
 
 ```python
 >>> import zipimport
->>> zip = zipimport.zipimporter("test_env/g.zip")
+>>> zip = zipimport.zipimporter("g.zip")
 >>> zip.archive
-'examples\\g.zip'
+'g.zip'
 >>>
 >>> a = zip.load_module("a")
 >>> a
-<module 'a' from 'examples\\g.zip\\a.py'>
+<module 'a' from 'D:\\GitHub\\python-cheatsheet-redefined\\test_env\\g.zip\\a.py'>
 >>> a.main()
 Hello everyone
 ```
@@ -1694,7 +1677,7 @@ ValueError: malformed node or string: <_ast.Call object at 0x00B11C50>
 [1, 2, 3]
 >>> hello_world = ast.parse("print('Hello World!')", "<string)", "exec")   # abstract syntax trees
 >>> ast.dump(hello_world)
-"Module(body=[Expr(value=Call(func=Name(id='print', ctx=Load()), args=[Constant(value='Hello World!')], keywords=[]))], type_ignores=[])"
+"Module(body=[Expr(value=Call(func=Name(id='print', ctx=Load()), args=[Constant(value='Hello World!')]))])"
 ```
 
 ## keyword
@@ -1704,7 +1687,7 @@ ValueError: malformed node or string: <_ast.Call object at 0x00B11C50>
 ```python
 >>> import keyword
 >>> keyword.kwlist
-['False', 'None', 'True', '__peg_parser__', 'and', 'as', 'assert', 'async', 'await', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']
+['False', 'None', 'True', 'and', 'as', 'assert', 'async', 'await', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']
 >>> keyword.iskeyword("True")
 True
 ```
@@ -1719,12 +1702,13 @@ True
 ...     print("Hello World")
 ...
 >>> dis.dis(func)
-  2           0 LOAD_GLOBAL              0 (print)
-              2 LOAD_CONST               1 ('Hello World')
-              4 CALL_FUNCTION            1
-              6 POP_TOP
-              8 LOAD_CONST               0 (None)
-             10 RETURN_VALUE
+  1           RESUME                   0
+
+  2           LOAD_GLOBAL              1 (print + NULL)
+              LOAD_CONST               1 ('Hello World')
+              CALL                     1
+              POP_TOP
+              RETURN_CONST             0 (None)
 >>> dis.show_code(func)
 Name:              func
 Filename:          <stdin>
@@ -1749,10 +1733,10 @@ Names:
 ```python
 >>> import tabnanny
 >>> tabnanny.verbose = True
->>> tabnanny.check("test_env/tabnanny_example.py")
-'examples/tabnanny_example.py': *** Line 3: trouble in tab city! ***
+>>> tabnanny.check("tabnanny_example.py")
+'tabnanny_example.py': *** Line 3: trouble in tab city! ***
 offending line: '\tprint(i)'
-indent not greater e.g. at tab sizes 1, 2, 3, 4
+inconsistent use of tabs and spaces in indentation
 ```
 
 ## this

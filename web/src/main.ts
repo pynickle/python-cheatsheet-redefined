@@ -191,7 +191,6 @@ function toggleCodePrefix(blockId: string): void {
             codeBlock.textContent = originalCode;
         }
 
-
         // 确保元素类型正确并重新高亮代码
         if ((window as any).hljs && typeof (window as any).hljs.highlightElement === 'function' && codeBlock instanceof HTMLElement) {
             try {
