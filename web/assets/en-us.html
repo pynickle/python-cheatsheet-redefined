@@ -1,81 +1,3 @@
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1,
-        minimum-scale=1,maximum-scale=1,user-scalable=no" />
-        <title>Python Cheatsheet Redefined</title>
-        <link rel="alternative stylesheet" id="code-style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/{{style}}.min.css">
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css">
-        <script
-        src="https://code.jquery.com/jquery-3.1.1.min.js"
-        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-        crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-        <script>hljs.highlightAll()</script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js"></script>
-        <script src="{{ url_for('static', filename='main.js') }}"></script>
-        <script>
-            $(function(){
-                $('#style').dropdown({
-                    onChange: function(value, text, $selectedItem) {
-                        window.location.href="/{{ language }}/" + value + "/" + text
-                    }
-                })
-            });
-            $(function(){
-                $('#language').dropdown({
-                    onChange: function(value, text, $selectedItem) {
-                        window.location.href="/" + value + "/{{ style.replace('/', '_') }}/{{ style_name }}"
-                    }
-                })
-            });
-            function download() {
-                {% if language=='english' %}
-                location.href =  "https://raw.githubusercontent.com/pynickle/python-cheatsheet-redefined/master/README.pdf"
-                {% else %}
-                location.href =  "https://raw.githubusercontent.com/pynickle/python-cheatsheet-redefined/master/README-zh-cn.pdf"
-                {% endif %}
-            }
-        </script>
-    </head>
-    <body>
-        <br>
-        <div class="ui container">
-            <div class="ui selection dropdown" id="style">
-                <input id="style-value" type="hidden" name="style">
-                <div class="text">{{ style_name }}</div>
-                <div class="menu">
-                    <div class="item" data-value="atom-one-dark">Atom One Dark</div>
-                    <div class="item" data-value="base16_edge-dark">Edge Dark</div>
-                    <div class="item" data-value="base16_tomorrow-night">Tomorrow Night</div>
-                    <div class="item" data-value="base16_material-darker">Material Darker</div>
-                    <div class="item" data-value="github-dark-dimmed">Github Dark Dimmed</div>
-                    <div class="item" data-value="androidstudio">Android Studio</div>
-                    <div class="ui divider"></div>
-                    <div class="item" data-value="atom-one-light">Atom One Light</div>
-                    <div class="item" data-value="base16_material-lighter">Material Lighter</div>
-                    <div class="item" data-value="base16_tomorrow">Tomorrow</div>
-                    <div class="item" data-value="github">Github</div>
-                </div>
-            </div>
-            &nbsp;
-            <div class="ui selection dropdown" id="language">
-                <input id="language-value" type="hidden" name="language">
-                <div class="text">{{ language_name }}</div>
-                <div class="menu">
-                    <div class="item" data-value="english">English</div>
-                    <div class="item" data-value="chinese">中文</div>
-                </div>
-            </div>
-            &nbsp;
-            <button class="ui button" onclick="download()">下载pdf</button>
-        </div>
-        <br>
-        <div id="content" class="ui container">
 <h1 id="python-standard-libraries-cheatsheet">Python Standard Libraries
 Cheatsheet</h1>
 <p>Depend on Python v3.9.8</p>
@@ -90,9 +12,9 @@ href="https://github.com/pynickle/python-cheatsheet">GitHub</a>.</p>
 <ul>
 <li><strong>Every code snippet here can run independently (some need the
 files provided by this repo)</strong></li>
-<li><strong>If you want to copy the code, use <a
-href="https://pynickle.github.io/ctc.html">command to
-code</a>(Temporarily unavailable)</strong></li>
+<li><strong>You can get a version of the page with switchable code
+themes and languages from the flask project in the web
+folder</strong></li>
 <li><strong>You can use GETREADME.py to download README.md from the
 repository (Chinese or English, with or not with command line prefixes
 is up to you!)</strong></li>
@@ -276,11 +198,11 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a hr
 <h4 id="split-sub-escape">split, sub, escape</h4>
 <div class="sourceCode" id="cb5"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> re</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> re.split(<span class="vs">r&quot;\W&quot;</span>, <span class="st">&quot;hello,world&quot;</span>)   <span class="co"># use regular expression</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> re.split(<span class="vs">r&quot;</span><span class="dv">\W</span><span class="vs">&quot;</span>, <span class="st">&quot;hello,world&quot;</span>)   <span class="co"># use regular expression</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>[<span class="st">&#39;hello&#39;</span>, <span class="st">&#39;world&#39;</span>]</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> re.sub(<span class="vs">r&quot;Boy|Girl&quot;</span>, <span class="st">&quot;Human&quot;</span>, <span class="st">&quot;boy and girl&quot;</span>, flags <span class="op">=</span> re.I)   <span class="co"># re.I means ignoring apitalization</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> re.sub(<span class="vs">r&quot;Boy</span><span class="cf">|</span><span class="vs">Girl&quot;</span>, <span class="st">&quot;Human&quot;</span>, <span class="st">&quot;boy and girl&quot;</span>, flags <span class="op">=</span> re.I)   <span class="co"># re.I means ignoring apitalization</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;Human and Human&#39;</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> re.escape(<span class="vs">r&quot;#$&amp;*+-.^|~&quot;</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> re.escape(<span class="vs">r&quot;#</span><span class="dv">$</span><span class="vs">&amp;</span><span class="op">*+</span><span class="vs">-</span><span class="dv">.^</span><span class="cf">|</span><span class="vs">~&quot;</span>)</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;</span><span class="ch">\\</span><span class="co">#</span><span class="ch">\\</span><span class="co">$</span><span class="ch">\\</span><span class="co">&amp;</span><span class="ch">\\</span><span class="co">*</span><span class="ch">\\</span><span class="co">+</span><span class="ch">\\</span><span class="co">-</span><span class="ch">\\</span><span class="co">.</span><span class="ch">\\</span><span class="co">^</span><span class="ch">\\</span><span class="co">|</span><span class="ch">\\</span><span class="co">~&#39;</span></span></code></pre></div>
 <h2 id="difflib">difflib</h2>
 <h4 id="differ">Differ</h4>
@@ -519,7 +441,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a h
 <span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>...</span>
 <span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>Traceback (most recent call last):</span>
 <span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  File <span class="st">&quot;&lt;stdin&gt;&quot;</span>, line <span class="dv">2</span>, <span class="kw">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  File <span class="st">&quot;C:\Python38\lib\enum.py&quot;</span>, line <span class="dv">860</span>, <span class="kw">in</span> unique</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  File <span class="st">&quot;C:</span><span class="er">\</span><span class="st">Python38</span><span class="er">\</span><span class="st">lib</span><span class="er">\</span><span class="st">enum.py&quot;</span>, line <span class="dv">860</span>, <span class="kw">in</span> unique</span>
 <span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&#39;duplicate values found in </span><span class="sc">%r</span><span class="st">: </span><span class="sc">%s</span><span class="st">&#39;</span> <span class="op">%</span></span>
 <span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="pp">ValueError</span>: duplicate values found <span class="kw">in</span> <span class="op">&lt;</span>enum <span class="st">&#39;Unique&#39;</span><span class="op">&gt;</span>: Jack <span class="op">-&gt;</span> Nick</span>
 <span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">class</span> Auto(enum.Enum):</span>
@@ -771,8 +693,8 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a h
 <h4 id="glob-1">glob</h4>
 <div class="sourceCode" id="cb35"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> glob</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> glob.glob(<span class="st">&quot;*.md&quot;</span>, recursive <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>[<span class="st">&#39;README-zh-cn.md&#39;</span>, <span class="st">&#39;README.md&#39;</span>, <span class="st">&#39;test.md&#39;</span>]</span></code></pre></div>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> glob.glob(<span class="st">&quot;*.pdf&quot;</span>, recursive <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>[<span class="st">&#39;README-zh-cn.pdf&#39;</span>, <span class="st">&#39;README.pdf&#39;</span>]</span></code></pre></div>
 <h2 id="tempfile">tempfile</h2>
 <h4 id="temporaryfile-mkstemp-mkdtemp">TemporaryFile, mkstemp,
 mkdtemp</h4>
@@ -892,8 +814,8 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a h
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="cf">with</span> zipfile.ZipFile(<span class="st">&quot;examples/g.zip&quot;</span>) <span class="im">as</span> f:   <span class="co"># extract zip file</span></span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>...     f.extractall()</span>
 <span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>...</span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="cf">with</span> zipfile.ZipFile(<span class="st">&quot;LICENSE.zip&quot;</span>, <span class="st">&quot;a&quot;</span>) <span class="im">as</span> <span class="bu">zip</span>:   <span class="co"># create zip file</span></span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>...     <span class="bu">zip</span>.write(<span class="st">&quot;LICENSE&quot;</span>)   <span class="co"># use write method to write files into zip file</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="cf">with</span> zipfile.ZipFile(<span class="st">&quot;a.zip&quot;</span>, <span class="st">&quot;a&quot;</span>) <span class="im">as</span> <span class="bu">zip</span>:   <span class="co"># create zip file</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>...     <span class="bu">zip</span>.write(<span class="st">&quot;README.md&quot;</span>)   <span class="co"># use write method to write files into zip file</span></span>
 <span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>...</span></code></pre></div>
 <h2 id="configparser">configparser</h2>
 <h4 id="configparser-1">ConfigParser</h4>
@@ -1238,9 +1160,9 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb72-1"><a h
 <span id="cb72-29"><a href="#cb72-29" aria-hidden="true" tabindex="-1"></a>  File <span class="st">&quot;&lt;stdin&gt;&quot;</span>, line <span class="dv">1</span>, <span class="kw">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span></span>
 <span id="cb72-30"><a href="#cb72-30" aria-hidden="true" tabindex="-1"></a>  File <span class="st">&quot;&lt;stdin&gt;&quot;</span>, line <span class="dv">5</span>, <span class="kw">in</span> foo</span>
 <span id="cb72-31"><a href="#cb72-31" aria-hidden="true" tabindex="-1"></a>  File <span class="st">&quot;&lt;stdin&gt;&quot;</span>, line <span class="dv">5</span>, <span class="kw">in</span> foo</span>
-<span id="cb72-32"><a href="#cb72-32" aria-hidden="true" tabindex="-1"></a>  File <span class="st">&quot;C:\Python37\lib</span><span class="ch">\b</span><span class="st">db.py&quot;</span>, line <span class="dv">88</span>, <span class="kw">in</span> trace_dispatch</span>
+<span id="cb72-32"><a href="#cb72-32" aria-hidden="true" tabindex="-1"></a>  File <span class="st">&quot;C:</span><span class="er">\</span><span class="st">Python37</span><span class="er">\</span><span class="st">lib</span><span class="ch">\b</span><span class="st">db.py&quot;</span>, line <span class="dv">88</span>, <span class="kw">in</span> trace_dispatch</span>
 <span id="cb72-33"><a href="#cb72-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">self</span>.dispatch_line(frame)</span>
-<span id="cb72-34"><a href="#cb72-34" aria-hidden="true" tabindex="-1"></a>  File <span class="st">&quot;C:\Python37\lib</span><span class="ch">\b</span><span class="st">db.py&quot;</span>, line <span class="dv">113</span>, <span class="kw">in</span> dispatch_line</span>
+<span id="cb72-34"><a href="#cb72-34" aria-hidden="true" tabindex="-1"></a>  File <span class="st">&quot;C:</span><span class="er">\</span><span class="st">Python37</span><span class="er">\</span><span class="st">lib</span><span class="ch">\b</span><span class="st">db.py&quot;</span>, line <span class="dv">113</span>, <span class="kw">in</span> dispatch_line</span>
 <span id="cb72-35"><a href="#cb72-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="va">self</span>.quitting: <span class="cf">raise</span> BdbQuit</span>
 <span id="cb72-36"><a href="#cb72-36" aria-hidden="true" tabindex="-1"></a>bdb.BdbQuit</span></code></pre></div>
 <h2 id="ensurepip">ensurepip</h2>
@@ -1501,16 +1423,16 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb88-1"><a h
 <span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> ast.literal_eval(<span class="st">&quot;__import__(&#39;os&#39;)&quot;</span>)   <span class="co"># safer than built in function eval</span></span>
 <span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>Traceback (most recent call last):</span>
 <span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a>  File <span class="st">&quot;&lt;stdin&gt;&quot;</span>, line <span class="dv">1</span>, <span class="kw">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span></span>
-<span id="cb88-5"><a href="#cb88-5" aria-hidden="true" tabindex="-1"></a>  File <span class="st">&quot;C:\Users\Lenovo\AppData\Local\Programs\Python\Python37-32\lib</span><span class="ch">\a</span><span class="st">st.py&quot;</span>, l</span>
+<span id="cb88-5"><a href="#cb88-5" aria-hidden="true" tabindex="-1"></a>  File <span class="st">&quot;C:</span><span class="er">\</span><span class="st">Users</span><span class="er">\</span><span class="st">Lenovo</span><span class="er">\</span><span class="st">AppData</span><span class="er">\</span><span class="st">Local</span><span class="er">\</span><span class="st">Programs</span><span class="er">\</span><span class="st">Python</span><span class="er">\</span><span class="st">Python37-32</span><span class="er">\</span><span class="st">lib</span><span class="ch">\a</span><span class="st">st.py&quot;</span>, l</span>
 <span id="cb88-6"><a href="#cb88-6" aria-hidden="true" tabindex="-1"></a>ine <span class="dv">91</span>, <span class="kw">in</span> literal_eval</span>
 <span id="cb88-7"><a href="#cb88-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> _convert(node_or_string)</span>
-<span id="cb88-8"><a href="#cb88-8" aria-hidden="true" tabindex="-1"></a>  File <span class="st">&quot;C:\Users\Lenovo\AppData\Local\Programs\Python\Python37-32\lib</span><span class="ch">\a</span><span class="st">st.py&quot;</span>, l</span>
+<span id="cb88-8"><a href="#cb88-8" aria-hidden="true" tabindex="-1"></a>  File <span class="st">&quot;C:</span><span class="er">\</span><span class="st">Users</span><span class="er">\</span><span class="st">Lenovo</span><span class="er">\</span><span class="st">AppData</span><span class="er">\</span><span class="st">Local</span><span class="er">\</span><span class="st">Programs</span><span class="er">\</span><span class="st">Python</span><span class="er">\</span><span class="st">Python37-32</span><span class="er">\</span><span class="st">lib</span><span class="ch">\a</span><span class="st">st.py&quot;</span>, l</span>
 <span id="cb88-9"><a href="#cb88-9" aria-hidden="true" tabindex="-1"></a>ine <span class="dv">90</span>, <span class="kw">in</span> _convert</span>
 <span id="cb88-10"><a href="#cb88-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> _convert_signed_num(node)</span>
-<span id="cb88-11"><a href="#cb88-11" aria-hidden="true" tabindex="-1"></a>  File <span class="st">&quot;C:\Users\Lenovo\AppData\Local\Programs\Python\Python37-32\lib</span><span class="ch">\a</span><span class="st">st.py&quot;</span>, l</span>
+<span id="cb88-11"><a href="#cb88-11" aria-hidden="true" tabindex="-1"></a>  File <span class="st">&quot;C:</span><span class="er">\</span><span class="st">Users</span><span class="er">\</span><span class="st">Lenovo</span><span class="er">\</span><span class="st">AppData</span><span class="er">\</span><span class="st">Local</span><span class="er">\</span><span class="st">Programs</span><span class="er">\</span><span class="st">Python</span><span class="er">\</span><span class="st">Python37-32</span><span class="er">\</span><span class="st">lib</span><span class="ch">\a</span><span class="st">st.py&quot;</span>, l</span>
 <span id="cb88-12"><a href="#cb88-12" aria-hidden="true" tabindex="-1"></a>ine <span class="dv">63</span>, <span class="kw">in</span> _convert_signed_num</span>
 <span id="cb88-13"><a href="#cb88-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> _convert_num(node)</span>
-<span id="cb88-14"><a href="#cb88-14" aria-hidden="true" tabindex="-1"></a>  File <span class="st">&quot;C:\Users\Lenovo\AppData\Local\Programs\Python\Python37-32\lib</span><span class="ch">\a</span><span class="st">st.py&quot;</span>, l</span>
+<span id="cb88-14"><a href="#cb88-14" aria-hidden="true" tabindex="-1"></a>  File <span class="st">&quot;C:</span><span class="er">\</span><span class="st">Users</span><span class="er">\</span><span class="st">Lenovo</span><span class="er">\</span><span class="st">AppData</span><span class="er">\</span><span class="st">Local</span><span class="er">\</span><span class="st">Programs</span><span class="er">\</span><span class="st">Python</span><span class="er">\</span><span class="st">Python37-32</span><span class="er">\</span><span class="st">lib</span><span class="ch">\a</span><span class="st">st.py&quot;</span>, l</span>
 <span id="cb88-15"><a href="#cb88-15" aria-hidden="true" tabindex="-1"></a>ine <span class="dv">55</span>, <span class="kw">in</span> _convert_num</span>
 <span id="cb88-16"><a href="#cb88-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&#39;malformed node or string: &#39;</span> <span class="op">+</span> <span class="bu">repr</span>(node))</span>
 <span id="cb88-17"><a href="#cb88-17" aria-hidden="true" tabindex="-1"></a><span class="pp">ValueError</span>: malformed node <span class="kw">or</span> string: <span class="op">&lt;</span>_ast.Call <span class="bu">object</span> at <span class="bn">0x00B11C50</span><span class="op">&gt;</span></span>
@@ -1594,7 +1516,3 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb92-1"><a h
 <h4 id="antigravity-1">antigravity</h4>
 <div class="sourceCode" id="cb93"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> antigravity</span></code></pre></div>
-
-        </div>
-    </body>
-</html>

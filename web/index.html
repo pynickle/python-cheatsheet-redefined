@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Python Cheatsheet Redefined</title>
+
+        <link rel="alternative stylesheet" id="hl-style-sheet">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+
+        <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js"></script>
+        <script src="dist/main.js"></script>
+        <style>
+            .content h4 {
+                margin-top: .8em;
+            }
+        </style>
+    </head>
+    <body class="ml-6 mt-4">
+            <div class="dropdown mr-2" id="hl-style">
+                <div class="dropdown-trigger">
+                    <button class="button" aria-haspopup="true" aria-controls="style-dropdown-menu">
+                        <span id="hl-style-text">Atom One Dark</span>
+                        <span class="icon is-small">
+                            <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M797.147 399.238c-0.212 5.273-2.461 9.984-5.976 13.397l-266.006 266.008c-3.438 3.438-8.558 5.705-13.129 5.705s-9.728-2.304-13.129-5.705l-266.277-266.277c-3.438-3.438-5.705-8.558-5.705-13.129s2.304-9.728 5.705-13.129l28.562-28.562c3.355-3.488 8.049-5.667 13.252-5.707 5.15 0.214 9.86 2.462 13.274 5.977l224.317 224.314 224.585-224.585c3.438-3.438 8.558-5.705 13.129-5.705s9.728 2.304 13.129 5.705l28.562 28.562c3.452 3.463 5.617 8.212 5.714 13.465z" fill="#666666" p-id="4672"></path></svg>
+                        </span>
+                    </button>
+                </div>
+                <div class="dropdown-menu" id="style-dropdown-menu" role="menu">
+                    <div class="dropdown-content">
+                        <a class="dropdown-item" data-value="atom-one-dark">Atom One Dark</a>
+                        <a class="dropdown-item" data-value="base16/edge-dark">Edge Dark</a>
+                        <a class="dropdown-item" data-value="base16/tomorrow-night">Tomorrow Night</a>
+                        <a class="dropdown-item" data-value="base16/material-darker">Material Darker</a>
+                        <a class="dropdown-item" data-value="github-dark-dimmed">Github Dark Dimmed</a>
+                        <a class="dropdown-item" data-value="androidstudio">Android Studio</a>
+                        <hr class="dropdown-divider" />
+                        <a class="dropdown-item" data-value="atom-one-light">Atom One Light</a>
+                        <a class="dropdown-item" data-value="base16/material-lighter">Material Lighter</a>
+                        <a class="dropdown-item" data-value="base16/tomorrow">Tomorrow</a>
+                        <a class="dropdown-item" data-value="github">Github</a>
+                    </div>
+                </div>
+            </div>
+            <div class="dropdown mr-2" id="language">
+                <div class="dropdown-trigger">
+                    <button class="button" aria-haspopup="true" aria-controls="language-dropdown-menu">
+                        <span id="language-text">English</span>
+                        <span class="icon is-small">
+                            <svg class="icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M797.147 399.238c-0.212 5.273-2.461 9.984-5.976 13.397l-266.006 266.008c-3.438 3.438-8.558 5.705-13.129 5.705s-9.728-2.304-13.129-5.705l-266.277-266.277c-3.438-3.438-5.705-8.558-5.705-13.129s2.304-9.728 5.705-13.129l28.562-28.562c3.355-3.488 8.049-5.667 13.252-5.707 5.15 0.214 9.86 2.462 13.274 5.977l224.317 224.314 224.585-224.585c3.438-3.438 8.558-5.705 13.129-5.705s9.728 2.304 13.129 5.705l28.562 28.562c3.452 3.463 5.617 8.212 5.714 13.465z" fill="#666666" p-id="4672"></path></svg>
+                        </span>
+                    </button>
+                </div>
+                <div class="dropdown-menu" id="language-dropdown-menu" role="menu">
+                    <div class="dropdown-content">
+                        <a class="dropdown-item" data-value="english">English</a>
+                        <a class="dropdown-item" data-value="chinese">中文</a>
+                    </div>
+                </div>
+            </div>
+            <!--<button class="button" onclick="download()">Download PDF</button>-->
+
+        <div class="content mt-4" id="content-container">
+        </div>
+    </body>
+</html>

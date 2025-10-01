@@ -1,0 +1,47 @@
+name: Build and Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'  # 选择合适的 Node 版本
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Compile TypeScript
+        run: npm tsc  # 假设这是你的编译命令；如果不同，替换为 npm run build 或 tsc
+
+      - name: Install Pandoc
+        uses: pandoc/actions/setup@v1  # 安装最新 Pandoc；可以指定 version: 'latest' 或具体版本如 '3.1.1'
+
+      - name: Create assets directory if not exists
+        run: mkdir -p web/assets
+
+      - name: Convert README.md to en-us.html
+        run: pandoc README.md -t html -o web/assets/en-us.html
+
+      - name: Convert README-zh-cn.md to zh-cn.html
+        run: pandoc README-zh-cn.md -t html -o web/assets/zh-cn.html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./web  # 部署 web/ 目录下的内容
+          publish_branch: gh-pages  # 推送到 gh-pages 分支
+          force_orphan: true  # 可选：保持 gh-pages 分支干净，只保留最新部署
+          user_name: 'pynickle'  # 可选：提交者名称
+          user_email: '2330458484@qq.com'  # 可选：提交者邮箱

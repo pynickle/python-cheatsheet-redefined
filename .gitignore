@@ -1,9 +1,7 @@
-python-cheatsheet-zh-cn.html
-/python-cheatsheet.html
-HtmlDiff.html
-a.zip
-myapp.pyz
-copysong.wav
-/test.md
+.idea/
 
-*.pyc
+__pycache__/
+
+package-lock.json
+node_modules/
+dist/
