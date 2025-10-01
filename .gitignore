@@ -7,5 +7,5 @@ node_modules/
 dist/
 /web/assets/
 
-/readme_sync/
 /readme_snatcher/python-cheatsheet.md
+/readme_sync/

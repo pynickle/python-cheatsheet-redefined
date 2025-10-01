@@ -1,6 +1,6 @@
 # Python Standard Libraries Cheatsheet
 
-Depend on Python v3.10.11
+Depend on Python v3.13.7
 
 All code snippets have been tested to ensure they work properly.
 

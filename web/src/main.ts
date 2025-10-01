@@ -11,14 +11,8 @@ type StyleType = 'atom-one-dark' | 'base16/edge-dark' | 'base16/tomorrow-night' 
 // 定义语言类型
 type LanguageType = 'english' | 'chinese';
 
-// 定义代码前缀显示状态
-type PrefixMode = 'with-prefix' | 'without-prefix';
-
 // 存储原始代码（带前缀）
 const originalCodeCache = new Map<string, string>();
-
-// 存储当前前缀模式
-let currentPrefixMode: PrefixMode = 'with-prefix';
 
 // 从代码中移除Python交互式前缀（保留前缀后的缩进，去除行首多余空格）
 function removePythonPrefixes(code: string): string {
@@ -123,9 +117,6 @@ function setupCodeBlocks(): void {
             }
         }
     });
-    
-    // 应用当前前缀模式
-    applyPrefixMode(currentPrefixMode);
 }
 
 // 切换单个代码块的前缀显示
@@ -155,44 +146,6 @@ function toggleCodePrefix(blockId: string): void {
                 console.error('Error highlighting code:', error);
             }
         }
-    }
-}
-
-// 应用全局前缀模式
-function applyPrefixMode(mode: PrefixMode): void {
-    currentPrefixMode = mode;
-    
-    document.querySelectorAll('pre code[id^="code-block-"]').forEach(block => {
-        const blockId = block.id;
-        if (originalCodeCache.has(blockId)) {
-            const originalCode = originalCodeCache.get(blockId)!;
-            
-            if (mode === 'without-prefix') {
-                block.textContent = removePythonPrefixes(originalCode);
-            } else {
-                block.textContent = originalCode;
-            }
-        }
-        
-        // 移除已高亮标记，以便重新高亮
-        if (block instanceof HTMLElement) {
-            delete block.dataset.highlighted;
-        }
-    });
-
-    // 重新高亮所有代码
-    if ((window as any).hljs && typeof (window as any).hljs.highlightAll === 'function') {
-        try {
-            (window as any).hljs.highlightAll();
-        } catch (error) {
-            console.error('Error highlighting code:', error);
-        }
-    }
-    
-    // 更新全局切换按钮的文本
-    const prefixToggleButton = document.getElementById('prefix-toggle-button');
-    if (prefixToggleButton) {
-        prefixToggleButton.textContent = mode === 'with-prefix' ? 'Show without prefix' : 'Show with prefix';
     }
 }
 
@@ -369,22 +322,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 下载PDF
-    (window as any).download = function() {
-        const language: LanguageType = (getURLParameter('lang') as LanguageType) || 'english';
-        if (language === 'english') {
-            window.open('https://raw.githubusercontent.com/pynickle/python-cheatsheet-redefined/master/README.pdf', '_blank');
-        } else {
-            window.open('https://raw.githubusercontent.com/pynickle/python-cheatsheet-redefined/master/README-zh-cn.pdf', '_blank');
-        }
-    };
-
-
-    
     // 初始加载内容
     loadContent(languageParam);
 });
 
 // 暴露全局函数供外部调用
-(window as any).applyPrefixMode = applyPrefixMode;
 (window as any).toggleCodePrefix = toggleCodePrefix;
