@@ -31,7 +31,7 @@ function removePythonPrefixes(code: string): string {
         }
         
         // 检查是否包含前缀
-        const hasPythonPrefix = line.includes('>>>') || line.includes('&gt;&gt;&gt;') || line.includes('...');
+        const hasPythonPrefix = line.startsWith('>>>') || line.startsWith('&gt;&gt;&gt;') || line.startsWith('...');
         
         // 输出行：前面不含>>>或者...的行
         if (!hasPythonPrefix) {
@@ -42,19 +42,15 @@ function removePythonPrefixes(code: string): string {
         let cleanedLine = line;
         
         // 不使用正则表达式处理前缀，保留前缀后的缩进
-        if (line.includes('>>>') && !line.includes('&gt;&gt;&gt;')) {
+        if (line.startsWith('>>>') && !line.startsWith('&gt;&gt;&gt;')) {
             // 处理 >>> 前缀
-            const prefixIndex = line.indexOf('>>>');
-            // 从prefixIndex+3开始，获取前缀后的内容
-            cleanedLine = line.substring(prefixIndex + 3);
-        } else if (line.includes('&gt;&gt;&gt;')) {
+            cleanedLine = line.substring(3);
+        } else if (line.startsWith('&gt;&gt;&gt;')) {
             // 处理HTML转义的 &gt;&gt;&gt; 前缀
-            const prefixIndex = line.indexOf('&gt;&gt;&gt;');
-            cleanedLine = line.substring(prefixIndex + 10); // '&gt;&gt;&gt;'长度为10
-        } else if (line.includes('...')) {
+            cleanedLine = line.substring(10); // '&gt;&gt;&gt;'长度为10
+        } else if (line.startsWith('...')) {
             // 处理 ... 前缀
-            const prefixIndex = line.indexOf('...');
-            cleanedLine = line.substring(prefixIndex + 3);
+            cleanedLine = line.substring(3);
         }
         
         // 去除行首可能存在的多余空格
@@ -189,9 +185,8 @@ function toggleCodePrefix(blockId: string): void {
         const currentText = codeBlock.textContent || '';
         
         // 判断当前状态并切换（检查更多可能的前缀模式）
-        if (currentText.includes('>>>') || currentText.includes('&gt;&gt;&gt;') || currentText.includes('...')) {
+        if (currentText.startsWith(">>>") || currentText.startsWith("&gt;&gt;&gt;")) {
             codeBlock.textContent = removePythonPrefixes(originalCode);
-            console.log(removePythonPrefixes(originalCode))
         } else {
             codeBlock.textContent = originalCode;
         }

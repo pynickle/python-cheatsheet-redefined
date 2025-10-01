@@ -199,8 +199,8 @@ Fork me on [GitHub](https://github.com/pynickle/python-cheatsheet-redefined).
 ... """
 >>> text1_lines = text1.splitlines()
 >>> text2_lines = text2.splitlines()
->>> with open("HtmlDiff.html", "w", encoding="utf-8") as f:   # make it a html file
-...     HtmlDiff = d.make_file(text1_lines, text2_lines)
+>>> with open("generated/HtmlDiff.html", "w", encoding="utf-8") as f:
+...     HtmlDiff = d.make_file(text1_lines, text2_lines)   # make it a html file
 ...     f.write(HtmlDiff)
 ...
 3331

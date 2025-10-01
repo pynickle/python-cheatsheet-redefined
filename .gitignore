@@ -1,6 +1,8 @@
 .idea/
 
 __pycache__/
+/test_env/generated/*
+!/test_env/generated/.gitkeep
 
 package-lock.json
 node_modules/
