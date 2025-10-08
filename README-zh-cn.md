@@ -9,8 +9,28 @@
 - [中文](README-zh-cn.md)
 - [English](README.md)
 
+<picture>
+  <source
+    media="(prefers-color-scheme: dark)"
+    srcset="
+      https://api.star-history.com/svg?repos=pynickle/python-cheatsheet-redefined&type=Date&theme=dark
+    "
+  />
+  <source
+    media="(prefers-color-scheme: light)"
+    srcset="
+      https://api.star-history.com/svg?repos=pynickle/python-cheatsheet-redefined&type=Date
+    "
+  />
+  <img
+    alt="Star History Chart"
+    src="https://api.star-history.com/svg?repos=pynickle/python-cheatsheet-redefined&type=Date"
+  />
+</picture>
+
 **注意**:
-- **这里的每个代码片段都可以独立运行 （一些需要这个仓库提供的文件）**
+- **这里的每个代码片段都可以独立运行**
+- **所有代码已在 test_env 工作目录中通过测试**
 - **在我的 [网站](https://enc.is-a.dev/python-cheatsheet-redefined) 上享受最佳阅读体验**
 - **你可以使用 readme_snatcher.py 来从仓库中下载 README.md (中英文，命令行前缀的有无皆可选择)**
 

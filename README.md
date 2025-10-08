@@ -9,9 +9,29 @@ Fork me on [GitHub](https://github.com/pynickle/python-cheatsheet-redefined).
 - [中文](README-zh-cn.md)
 - [English](README.md)
 
+<picture>
+  <source
+    media="(prefers-color-scheme: dark)"
+    srcset="
+      https://api.star-history.com/svg?repos=pynickle/python-cheatsheet-redefined&type=Date&theme=dark
+    "
+  />
+  <source
+    media="(prefers-color-scheme: light)"
+    srcset="
+      https://api.star-history.com/svg?repos=pynickle/python-cheatsheet-redefined&type=Date
+    "
+  />
+  <img
+    alt="Star History Chart"
+    src="https://api.star-history.com/svg?repos=pynickle/python-cheatsheet-redefined&type=Date"
+  />
+</picture>
+
 **Notes**:
 
-- **Every code snippet here can run independently (some need the files provided by this repo)**
+- **Every code snippet here can run independently**
+- **All code has passed testing in the test_env working directory**
 - **Get the best reading experience on my [website](https://enc.is-a.dev/python-cheatsheet-redefined)**
 - **You can use readme_snatcher.py to download README.md from the repository (Chinese or English, with or not with command line prefixes is up to you!)**
 
