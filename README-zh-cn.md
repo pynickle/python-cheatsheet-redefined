@@ -41,7 +41,7 @@
 
 **二进制数据**: [``codecs``](#codecs), [``struct``](#struct)
 
-**数据类型**: [``datetime``](#datetime), [``calendar``](#calendar), [``collections``](#collections),[``copy``](#copy), [``pprint``](#pprint), [``enum``](#enum), [``bisect``](#bisect), [``heapq``](#heapq), [``weakref``](#weakref)
+**数据类型**: [``datetime``](#datetime), [``zoneinfo``](#zoneinfo), [``calendar``](#calendar), [``collections``](#collections),[``copy``](#copy), [``pprint``](#pprint), [``enum``](#enum), [``bisect``](#bisect), [``heapq``](#heapq), [``weakref``](#weakref)
 
 **数学模块**: [``math``](#math), [``cmath``](#cmath), [``random``](#random),
 [``fractions``](#fractions), [``decimal``](#decimal), [``statistics``](#statistics)
@@ -384,6 +384,23 @@ datetime.IsoCalendarDate(year=2019, week=29, weekday=7)
 'Sun Jul 21 00:00:00 2019'
 >>> date.strftime("%Y %d %y, %H:%M:%S")
 '2019 21 19, 00:00:00'
+```
+
+## zoneinfo
+
+#### zoneinfo
+
+```python
+>>> from zoneinfo import ZoneInfo
+>>> from datetime import datetime
+>>>
+>>> time = datetime(2025, 10, 26, 17, 23, tzinfo = ZoneInfo("Asia/Shanghai"))
+>>> time
+datetime.datetime(2025, 10, 26, 17, 23, tzinfo=zoneinfo.ZoneInfo(key='Asia/Shanghai'))
+>>> time.tzname()
+'CST'
+>>> time.astimezone(ZoneInfo("America/Los_Angeles"))
+datetime.datetime(2025, 10, 26, 2, 23, tzinfo=zoneinfo.ZoneInfo(key='America/Los_Angeles'))
 ```
 
 ## calendar
