@@ -1,6 +1,6 @@
 # Python Standard Libraries Cheatsheet
 
-Depend on Python v3.13.7
+Depend on Python v3.14.0
 
 All code snippets have been tested to ensure they work properly.
 
@@ -223,7 +223,7 @@ Fork me on [GitHub](https://github.com/pynickle/python-cheatsheet-redefined).
 ...     HtmlDiff = d.make_file(text1_lines, text2_lines)   # make it a html file
 ...     f.write(HtmlDiff)
 ...
-3391
+3739
 ```
 
 #### SequenceMatcher
@@ -280,7 +280,7 @@ Match(a=1, b=0, size=4)
 >>> unicodedata.name("(")   # reverse to lookup
 'LEFT PARENTHESIS'
 >>> unicodedata.unidata_version
-'15.1.0'
+'16.0.0'
 ```
 
 ## readline
@@ -868,7 +868,7 @@ cmp1.txt | Line Number: 5 |:  5
 ...         [2, "second"]]
 >>> dumps = pickle.dumps(data)   # similar to json module
 >>> dumps
-b'\x80\x04\x95"\x00\x00\x00\x00\x00\x00\x00]\x94(]\x94(K\x01\x8c\x05first\x94e]\x94(K\x02\x8c\x06second\x94ee.'
+b'\x80\x05\x95"\x00\x00\x00\x00\x00\x00\x00]\x94(]\x94(K\x01\x8c\x05first\x94e]\x94(K\x02\x8c\x06second\x94ee.'
 >>> pickle.loads(dumps)
 [[1, 'first'], [2, 'second']]
 ```
@@ -1725,10 +1725,11 @@ True
   1           RESUME                   0
 
   2           LOAD_GLOBAL              1 (print + NULL)
-              LOAD_CONST               1 ('Hello World')
+              LOAD_CONST               0 ('Hello World')
               CALL                     1
               POP_TOP
-              RETURN_CONST             0 (None)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
 >>> dis.show_code(func)
 Name:              func
 Filename:          <stdin>
