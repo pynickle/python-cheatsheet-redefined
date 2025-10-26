@@ -392,7 +392,7 @@ datetime.IsoCalendarDate(year=2019, week=29, weekday=7)
 #### zoneinfo
 
 ```python
->>> from zoneinfo import ZoneInfo
+>>> from zoneinfo import ZoneInfo, available_timezones   # All available IANA time zone strings
 >>> from datetime import datetime
 >>>
 >>> time = datetime(2025, 10, 26, 17, 23, tzinfo = ZoneInfo("Asia/Shanghai"))
