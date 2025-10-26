@@ -101,12 +101,15 @@
 
 ```python
 >>> import string
+
+>>> # not locale-dependent
 >>> string.ascii_letters
 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 >>> string.ascii_lowercase
 'abcdefghijklmnopqrstuvwxyz'
 >>> string.ascii_uppercase
 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+>>> 
 >>> string.digits
 '0123456789'
 >>> string.hexdigits
@@ -126,7 +129,7 @@
 ```python
 >>> import string
 >>> formatter = string.Formatter()
->>> strcmp = "my name is {name}"
+>>> strcmp = "my name is {name}"   # escaped by doubling braces {{ and }}
 >>> dct = {"name": "nick"}
 >>> formatter.format(strcmp, **dct)   # use dict to format
 'my name is nick'
@@ -134,6 +137,30 @@
 >>> strcmp = "pi is about {}"
 >>> formatter.format(strcmp, *data)   # use tuple to format
 'pi is about 3'
+>>> 
+>>> # positional argument
+>>> class Item:
+...     def __init__(self, name, price):
+...         self.name = name
+...         self.price = price
+>>> strcmp = "The price of the first item is ${0.price}, and the buyer is {1[0]}."   # use positional argument
+>>> item_data = Item("Sword", 19.99)
+>>> buyers_list = ["Alice", "Bob", "Charlie"]
+>>> strcmp.format(item_data, buyers_list)
+'The price of the first item is $19.99, and the buyer is Alice.'
+>>> 
+>>> # other useful format features
+>>> '{:*^20}'.format('Hello')   # center align with * as fill character and 20 as width
+'*******Hello********'
+>>> '{:+f}; {:+f}'.format(3.14, -3.14)  # show + for positive number
+'+3.140000; -3.140000'
+>>> 'Percent: {:.2%}'.format(0.25)   # format as percent with two decimal places
+'Percent: 25.00%'
+>>> 
+>>> import datetime
+>>> time = datetime.datetime(2025, 10, 26, 16, 24, 30)
+>>> '{:%Y-%m-%d %H:%M:%S}'.format(time)
+'2025-10-26 16:24:30'
 ```
 
 #### Template
@@ -216,6 +243,7 @@
 ... this is difflib document
 ... feature: diff in linux
 ... """
+>>> 
 >>> text1_lines = text1.splitlines()
 >>> text2_lines = text2.splitlines()
 >>> with open("generated/HtmlDiff.html", "w", encoding="utf-8") as f:
@@ -255,6 +283,7 @@ Match(a=1, b=0, size=4)
 'Hello,World! My name is nick, l am 14 [...]'
 >>> textwrap.shorten(strcmp, width = 45, placeholder = "...")   # change the placeholder
 'Hello,World! My name is nick, l am 14...'
+>>> 
 >>> strcmp = """
 ...     hello world!
 ... """
@@ -340,6 +369,7 @@ More Information about strftime is on [strftime docs](#https://docs.python.org/3
 1
 >>> datetime.MAXYEAR
 9999
+>>> 
 >>> date = datetime.date
 >>> date.today()
 datetime.date(2019, 7, 21)
@@ -349,7 +379,7 @@ datetime.date(2019, 7, 21)
 >>> date.weekday()
 6
 >>> date.isocalendar()
-(2019, 29, 7)
+datetime.IsoCalendarDate(year=2019, week=29, weekday=7)
 >>> date.ctime()
 'Sun Jul 21 00:00:00 2019'
 >>> date.strftime("%Y %d %y, %H:%M:%S")
