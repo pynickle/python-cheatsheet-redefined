@@ -42,15 +42,19 @@ Fork me on [GitHub](https://github.com/pynickle/python-cheatsheet-redefined).
 
 **Binary Data**: [``codecs``](#codecs), [``struct``](#struct)
 
-**Data Type**: [``datetime``](#datetime), [``zoneinfo``](#zoneinfo), [``calendar``](#calendar), [``collections``](#collections),[``copy``](#copy), [``pprint``](#pprint), [``enum``](#enum), [``bisect``](#bisect), [``heapq``](#heapq), [``weakref``](#weakref)
+**Data Type**: [``datetime``](#datetime), [``zoneinfo``](#zoneinfo), [``calendar``](#calendar),
+[``collections``](#collections),[``copy``](#copy), [``pprint``](#pprint),
+[``enum``](#enum), [``bisect``](#bisect), [``heapq``](#heapq),
+[``weakref``](#weakref)
 
 **Mathematical Modules**: [``math``](#math), [``cmath``](#cmath), [``random``](#random),
 [``fractions``](#fractions), [``decimal``](#decimal), [``statistics``](#statistics)
 
 **Functional Programming**: [``itertools``](#itertools), [``functools``](#functools), [``operator``](#operator)
 
-**Directory Access**: [``pathlib``](#pathlib), [``os.path``](#os.path), [``glob``](#glob), [``tempfile``](#tempfile),
-[``filecmp``](#filecmp), [``fileinput``](#fileinput), [``shutil``](#shutil), [``linecache``](#linecache)
+**Directory Access**: [``pathlib``](#pathlib), [``os.path``](#os.path), [``glob``](#glob),
+[``tempfile``](#tempfile), [``filecmp``](#filecmp), [``fileinput``](#fileinput),
+[``shutil``](#shutil), [``linecache``](#linecache)
 
 **Data Persistence**: [``pickle``](#pickle), [``copyreg``](#copyreg)
 
@@ -61,12 +65,13 @@ Fork me on [GitHub](https://github.com/pynickle/python-cheatsheet-redefined).
 **Cryptographic Services**: [``hashlib``](#hashlib), [``hmac``](#hmac), [``secrets``](#secrets)
 
 **Operating System**: [``os``](#os), [``time``](#time), [``logging``](#logging),
-[``getpass``](#getpass),  [``platform``](#platform), [``argparse``](#argparse),
-[``errno``](#errno), [``io``](#io)
+[``platform``](#platform), [``errno``](#errno), [``io``](#io)
+
+**Command-line Interface libraries**: [``argparse``](#argparse), [``getpass``](#getpass)
 
 **Networking Communication**: [``socket``](#socket)
 
-**Internet Data**: [``json``](#json)
+**Internet Data Handling**: [``email``](#email), [``json``](#json)
 
 **Structured Markup**: [``html``](#html)
 
@@ -85,10 +90,9 @@ Fork me on [GitHub](https://github.com/pynickle/python-cheatsheet-redefined).
 
 **Software Packaging**: [``ensurepip``](#ensurepip), [``zipapp``](#zipapp)
 
-**Runtime Services**: [``sys``](#sys), [``dataclasses``](#dataclasses),
-[``contextlib``](#contextlib), [``abc``](#abc), [``traceback``](#traceback),
-[``__future__``](#__future__), [``atexit``](#atexit), [``builtins``](#builtins),
-[``inspect``](#inspect)
+**Runtime Services**: [``sys``](#sys), [``dataclasses``](#dataclasses), [``contextlib``](#contextlib), 
+[``abc``](#abc), [``traceback``](#traceback), [``__future__``](#__future__),
+[``atexit``](#atexit), [``builtins``](#builtins), [``inspect``](#inspect)
 
 **Importing Modules**: [``zipimport``](#zipimport), [``importlib``](#importlib), [``runpy``](#runpy)
 
@@ -1102,20 +1106,6 @@ More details about format for logging is on [logging docs](#https://docs.python.
 2019-07-29 12:31:59,758 - __main__ - Level 35 - log
 ```
 
-## getpass
-
-#### getpass, getuser
-
-```python
->>> import getpass
->>> password = getpass.getpass()   # what you enter will not be displayed on the screen
-Password:
->>> password
-'xxx'
->>> getpass.getuser()
-'Nick'
-```
-
 ## platform
 
 #### machine, platform, python_compiler, python_version, system
@@ -1132,37 +1122,6 @@ Password:
 '3.9.8'
 >>> platform.system()
 'Windows'
-```
-
-## argparse
-
-#### ArgumentParser
-
-```python
->>> import os
->>> def cmd(command):
-...     res = os.popen(command)
-...     print(res.read())
-...
->>> cmd("python argparse_example.py -a 1 -b 2 --sum 1 2 3 4 -r 10 -t")
-Namespace(a=1, b=2, sum=[1, 2, 3, 4], required='10', true=True)
-3
-10
-
->>> cmd("python argparse_example.py --help")
-usage: argparse_example.py [-h] [-a A] [-b B] [-s SUM [SUM ...]] -r REQUIRED
-                           [-t]
-
-the example parser for argparse
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -a A                  the a number for adding
-  -b B                  the b number for adding
-  -s SUM [SUM ...], --sum SUM [SUM ...]
-  -r REQUIRED, --required REQUIRED
-  -t, --true
-
 ```
 
 ## errno
@@ -1199,6 +1158,51 @@ b'Hello World'
 >>> bytesio.close()
 ```
 
+## argparse
+
+#### ArgumentParser
+
+```python
+>>> import os
+>>> def cmd(command):
+...     res = os.popen(command)
+...     print(res.read())
+...
+>>> cmd("python argparse_example.py -a 1 -b 2 --sum 1 2 3 4 -r 10 -t")
+Namespace(a=1, b=2, sum=[1, 2, 3, 4], required='10', true=True)
+3
+10
+
+>>> cmd("python argparse_example.py --help")
+usage: argparse_example.py [-h] [-a A] [-b B] [-s SUM [SUM ...]] -r REQUIRED
+                           [-t]
+
+the example parser for argparse
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -a A                  the a number for adding
+  -b B                  the b number for adding
+  -s SUM [SUM ...], --sum SUM [SUM ...]
+  -r REQUIRED, --required REQUIRED
+  -t, --true
+
+```
+
+## getpass
+
+#### getpass, getuser
+
+```python
+>>> import getpass
+>>> password = getpass.getpass()   # what you enter will not be displayed on the screen
+Password:
+>>> password
+'xxx'
+>>> getpass.getuser()
+'Nick'
+```
+
 ## socket
 
 #### socket
@@ -1213,6 +1217,46 @@ Connected by ('127.0.0.1', 64346)
 ```bash
 python socket_client.py
 Received b'Hello, world'
+```
+
+## email
+
+#### message
+
+```python
+>>> from email.message import EmailMessage
+>>> msg = EmailMessage()
+>>> 
+>>> msg['Subject'] = 'Test Email'
+>>> msg['From'] = 'sender@email.com'
+>>> msg['To'] = 'receiver@email.com'
+>>> 
+>>> msg.set_content('Text Here', charset = 'utf-8')
+>>> msg.add_alternative("""\
+... <html>
+...   <body>
+...     <p>HTML Text Here</p>
+...   </body>
+... </html>
+... """, subtype = 'html', charset = 'utf-8') 
+>>> 
+>>> with open('china.jpg', 'rb') as img:
+...     msg.add_attachment(img.read(), maintype = 'image', subtype = 'jpg',
+...             filename = 'china.jpg')        
+... 
+>>> for i, part in enumerate(msg.walk(), 1):
+...     ctype = part.get_content_type()
+...     filename = part.get_filename() or 'none'
+...     print(f"Part {i}: {ctype}   Filename: {filename}")
+... 
+Part 1: multipart/mixed   Filename: none
+Part 2: multipart/alternative   Filename: none
+Part 3: text/plain   Filename: none
+Part 4: text/html   Filename: none
+Part 5: image/jpg   Filename: china.jpg
+>>> 
+>>> msg.as_string()[:500]
+'Subject: Test Email\nFrom: sender@email.com\nTo: receiver@email.com\nMIME-Version: 1.0\nContent-Type: multipart/mixed; boundary="===============3830598460544537904=="\n\n--===============3830598460544537904==\nContent-Type: multipart/alternative;\n boundary="===============2748872134953180437=="\n\n--===============2748872134953180437==\nContent-Type: text/plain; charset="utf-8"\nContent-Transfer-Encoding: 7bit\n\nText Here\n\n--===============2748872134953180437==\nContent-Type: text/html; charset="utf-8"\nConte'
 ```
 
 ## json
