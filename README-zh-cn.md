@@ -39,7 +39,7 @@
 **文本处理**: [``string``](#string), [``re``](#re), [``difflib``](#difflib),
 [``textwrap``](#textwrap), [``unicodedata``](#unicodedata), [``readline``](#readline)
 
-**二进制数据**: [``codecs``](#codecs), [``struct``](#struct)
+**二进制数据服务**: [``codecs``](#codecs), [``struct``](#struct)
 
 **数据类型**: [``datetime``](#datetime), [``zoneinfo``](#zoneinfo), [``calendar``](#calendar),
 [``collections``](#collections),[``copy``](#copy), [``pprint``](#pprint),
@@ -55,7 +55,7 @@
 [``tempfile``](#tempfile), [``filecmp``](#filecmp), [``fileinput``](#fileinput),
 [``shutil``](#shutil), [``linecache``](#linecache)
 
-**数据持久化**: [``pickle``](#pickle), [``copyreg``](#copyreg)
+**数据持久化**: [``pickle``](#pickle), [``copyreg``](#copyreg), [``shelve``](#shelve)
 
 **数据压缩**: [``zlib``](#zlib), [``lzma``](#lzma), [``zipfile``](#zipfile)
 
@@ -946,6 +946,45 @@ pickle A
 >>>
 >>> c = pickle.dumps(a)
 pickle A
+```
+
+## shelve
+
+#### 
+
+```python
+>>> import shelve
+>>> 
+>>> # Open a shelf file (creates if not exists)
+>>> with shelve.open('geenrated/mydata.db') as db:
+...     # Basic operations: set, get, delete, check existence
+...     db['name'] = 'Alice'
+...     db['numbers'] = [1, 2, 3]
+...     
+...     db['name']
+...     'numbers' in db   # Check key
+...     list(db.keys())   # List keys
+...     
+...     # Modify mutable object without writeback (requires re-assignment)
+...     temp = db['numbers']  # Get copy
+...     temp.append(4)  # Modify
+...     db['numbers'] = temp  # Re-assign to persist
+...     
+...     del db['name']
+...     
+...     # Sync to ensure data is written to disk
+...     db.sync()
+... 
+Alice
+True
+['name', 'numbers']
+>>> 
+>>> # Re-open with writeback=True for direct modification
+>>> db = shelve.open('mydata.db', writeback = True)
+>>> db['numbers'].append(5)  # Direct modify (auto-persisted on close)
+>>> db['numbers']
+[1, 2, 3, 4, 5]
+>>> db.close()   # Close and sync
 ```
 
 ## zlib
