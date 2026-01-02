@@ -80,6 +80,8 @@ Fork me on [GitHub](https://github.com/pynickle/python-cheatsheet-redefined).
 **Multimedia Services**: [``wave``](#wave), [``sndhdr``](#sndhdr), [``imghdr``](#imghdr),
 [``colorsys``](#colorsys)
 
+**Internationalization**: [``gettext``](#gettext)
+
 **Program Frameworks**: [``turtle``](#turtle)
 
 **Graphical Interfaces**: [``tkinter``](#tkinter)
@@ -1360,6 +1362,70 @@ _wave_params(nchannels=2, sampwidth=2, framerate=44100, nframes=442368, comptype
 (0.16666666666666666, 64.0, -1.0158730158730158)
 >>> colorsys.rgb_to_hsv(128, 128, 0)
 (0.16666666666666666, 1.0, 128)
+```
+
+## gettext
+
+#### gettext, ngettext
+
+```python
+>>> import gettext
+>>> import os
+>>> 
+>>> DOMAIN = 'myapp'
+>>> LOCALE_DIR = os.path.abspath('locale')
+>>> 
+>>> gettext.bindtextdomain(DOMAIN, LOCALE_DIR)   # Bind the domain to the locale directory
+'D:\\GitHub\\python-cheatsheet-redefined\\test_env\\locale'
+>>> gettext.textdomain(DOMAIN)   # Set the current global domain
+'myapp'
+>>> os.environ['LANGUAGE'] = 'zh'
+>>>  
+>>> _ = gettext.gettext
+>>> _n = gettext.ngettext
+>>> 
+>>> _('hello_world')
+'你好，世界！'
+>>> _n('error', 'errors', 3) % 3
+'有 3 个错误。'
+```
+
+#### translation
+
+```python
+>>> import os
+>>> import gettext
+>>> 
+>>> DOMAIN = 'myapp'
+>>> LOCALE_DIR = os.path.abspath('locale')
+>>> 
+>>> zh_trans = gettext.translation(
+...     DOMAIN,
+...     localedir=LOCALE_DIR,
+...     languages=['zh'],
+...     fallback=True  # 找不到 .mo 时不报错
+... )
+>>> 
+>>> en_trans = gettext.translation(
+...     DOMAIN,
+...     localedir=LOCALE_DIR,
+...     languages=['en'],
+...     fallback=True
+... )
+>>> 
+>>> _zh = zh_trans.gettext   # Get the specific gettext function from the instance
+>>> _zh('hello_world')
+你好，世界！
+>>> 
+>>> # Install the Chinese translation globally
+>>> # This sets the global _() function for all modules to use zh_trans.
+>>> zh_trans.install()
+>>> _('hello_world'))
+你好，世界！
+>>> 
+>>> en_trans.install()
+>>> _('hello_world')
+Hello, world!
 ```
 
 ## turtle
