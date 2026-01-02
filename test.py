@@ -19,7 +19,8 @@ NOTEST = ["random.random", "random.randint", "random.randrange",
           ]
 NOTEST_2 = ["del c", "list(p.glob('**/*.py'))", "name", "c = pickle.dumps(a)",
             "password", "a.timeit(number = 1000)", "foo()",
-            'cmd("python argparse_example.py --help")'
+            'cmd("python argparse_example.py --help")', 'msg.as_string()[:500]',
+            "_('hello_world')"
             ]
 
 
@@ -78,7 +79,6 @@ Traceback (most recent call last):
 ZeroDivisionError: division by zero"""
     code = code.replace(first, "").replace(second, "")
     return code
-
 
 if __name__ == "__main__":
     code = main("../README.md")

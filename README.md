@@ -108,7 +108,7 @@ Fork me on [GitHub](https://github.com/pynickle/python-cheatsheet-redefined).
 
 ```python
 >>> import string
-
+>>> 
 >>> # not locale-dependent
 >>> string.ascii_letters
 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -959,7 +959,7 @@ pickle A
 >>> import shelve
 >>> 
 >>> # Open a shelf file (creates if not exists)
->>> with shelve.open('geenrated/mydata.db') as db:
+>>> with shelve.open('generated/mydata.db') as db:
 ...     # Basic operations: set, get, delete, check existence
 ...     db['name'] = 'Alice'
 ...     db['numbers'] = [1, 2, 3]
@@ -978,12 +978,12 @@ pickle A
 ...     # Sync to ensure data is written to disk
 ...     db.sync()
 ... 
-Alice
+'Alice'
 True
 ['name', 'numbers']
 >>> 
 >>> # Re-open with writeback=True for direct modification
->>> db = shelve.open('mydata.db', writeback = True)
+>>> db = shelve.open('generated/mydata.db', writeback = True)
 >>> db['numbers'].append(5)  # Direct modify (auto-persisted on close)
 >>> db['numbers']
 [1, 2, 3, 4, 5]
@@ -1401,31 +1401,31 @@ _wave_params(nchannels=2, sampwidth=2, framerate=44100, nframes=442368, comptype
 >>> 
 >>> zh_trans = gettext.translation(
 ...     DOMAIN,
-...     localedir=LOCALE_DIR,
-...     languages=['zh'],
-...     fallback=True  # 找不到 .mo 时不报错
+...     localedir = LOCALE_DIR,
+...     languages = ['zh'],
+...     fallback = True
 ... )
 >>> 
 >>> en_trans = gettext.translation(
 ...     DOMAIN,
-...     localedir=LOCALE_DIR,
-...     languages=['en'],
-...     fallback=True
+...     localedir = LOCALE_DIR,
+...     languages = ['en'],
+...     fallback = True
 ... )
 >>> 
 >>> _zh = zh_trans.gettext   # Get the specific gettext function from the instance
 >>> _zh('hello_world')
-你好，世界！
+'你好，世界！'
 >>> 
 >>> # Install the Chinese translation globally
 >>> # This sets the global _() function for all modules to use zh_trans.
 >>> zh_trans.install()
->>> _('hello_world'))
-你好，世界！
+>>> _('hello_world')
+'你好，世界！'
 >>> 
 >>> en_trans.install()
 >>> _('hello_world')
-Hello, world!
+'Hello, world!'
 ```
 
 ## turtle
@@ -1797,14 +1797,10 @@ True
 #### importer
 
 ```python
->>> import zipimport
->>> zip = zipimport.zipimporter("g.zip")
->>> zip.archive
-'g.zip'
->>>
->>> a = zip.load_module("a")
->>> a
-<module 'a' from 'D:\\GitHub\\python-cheatsheet-redefined\\test_env\\g.zip\\a.py'>
+>>> # the zipimport module is not explicitly used
+>>> import sys
+>>> sys.path.insert(0, 'g.zip')
+>>> import a
 >>> a.main()
 Hello everyone
 ```
